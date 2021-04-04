@@ -1853,3 +1853,31 @@ figure figcaption {
 	color:black;
 	background: #e7ab3c;
 }
+
+
+.investplans{
+  color:whitesmoke;
+  text-align: center;
+  text-decoration: underline;
+}  
+
+.whyus{
+  color:whitesmoke;
+}
+
+.eee{
+  display: flex;
+}
+
+.ref{
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.fivep{
+ font-size: 100px;
+ color: gold;
+}
