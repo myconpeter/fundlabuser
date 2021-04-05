@@ -43,6 +43,23 @@ app.get('/signup', (req, res)=>{
 res.render('signup')
 })
 
+app.get('/forgetpassword', (req, res)=>{
+    res.render('forgetpassword')
+})
+
+app.get('/admin', (req, res)=>{
+    res.render('adminlogin')
+})
+
+app.get('/adminpage', (req, res)=>{
+    res.render('adminpage')
+})
+
+app.get('/withdraw', (req, res)=>{
+    res.render('withdrawal')
+})
+
+
 
 
 

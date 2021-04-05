@@ -535,10 +535,10 @@ a {
     font-weight: normal;
     letter-spacing: .1em;
     text-transform: uppercase; }
-  .site-blocks-cover p {
+  /* .site-blocks-cover p {
     color: #fff;
-    font-size: 1.5rem;
-    line-height: 1.5; }
+    font-size: 40px;
+    line-height: 1.5; } */
   .site-blocks-cover .intro-text {
     font-size: 16px;
     line-height: 1.5; }
@@ -1881,3 +1881,21 @@ figure figcaption {
  font-size: 100px;
  color: gold;
 }
+
+.headertext {
+  font-size: 40px;
+  line-height: 1.5;
+  color: #fff;
+   }
+  @media (min-width: 768px) {
+    .headertext {
+      font-size: 100px; } }
+
+      .reftext {
+        font-size: 15px;
+        line-height: 1.5;
+        color: #fff;
+         }
+        @media (min-width: 768px) {
+          .reftext {
+            font-size: 50px; } }
