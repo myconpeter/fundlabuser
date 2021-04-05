@@ -1,7 +1,7 @@
 const express = require('express');
 const app     = express();
 const bodyParser = require('body-parser');
-const PORT    = 8000;
+const PORT    = process.env.PORT || 8000;
 
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -31,12 +31,16 @@ app.get('/contact', (req, res)=>{
     res.render('contact')
 })
 
-app.get('/vendors', (req, res)=>{
-    res.render('vendors')
+app.get('/vendor', (req, res)=>{
+    res.render('vendor')
 })
 
 app.get('/about', (req, res)=>{
     res.render('about')
+})
+
+app.get('/signup', (req, res)=>{
+res.render('signup')
 })
 
 
