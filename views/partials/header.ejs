@@ -46,13 +46,23 @@
                   <li class="active">
                     <a href="/">Home</a>
                   </li>
-                  <li><a href="#">My Investment</a></li>
+                  <li><a href="/myinvestment">My Investment</a></li>
                   <li><a href="/vendor">Vendors</a></li>
                   <li><a href="/about">About</a></li>
                   <li><a href="/contact">Contact</a></li>
                   <!-- <hr style="background-color: red;"> -->
+                  <% if(!currentUser){ %>
                   <li ><a style="color: blue;" href="/login">Log In</a></li>
                   <li ><a style="color: green;" href="/signup">Sign Up</a></li>
+
+                  <%  } else { %>
+                    <li class="nav-item">
+                      <a class="nav-link" href="">Signed in as: <%= currentUser.username %></a>
+                    </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/logout">Logout</a>
+                </li>
+                <%  } %>      
 
 
 

@@ -1,56 +1,91 @@
 <%- include("./partials/loginhead"); %>
 
-    
+    <form action="/signup" method="POST" >
 	
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
-				<form action="#" class="login100-form validate-form">
+				<form class="login100-form validate-form">
 					<span class="login100-form-title p-b-33">
 						<a  href="/" class="btn btn-danger">Back</a>
 
 						Registration
 					</span>
-
-					<div class="wrap-input100 validate-input" data-validate = "Valid Full name is required">
-						<input class="input100" type="text" name="Fullname" placeholder="Full name">
+					<%- include ('./partials/messages') %>
+					 <div class="wrap-input100 validate-input" data-validate = "Valid Full name is required">
+						<input class="input100"
+						 type="fullname" 
+						name="fullname" 
+						placeholder="Full name"
+						 value="<%= typeof fullname != 'undefined' ? fullname : '' %>"
+						 >
 						<span class="focus-input100-1"></span>
 						<span class="focus-input100-2"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Valid Username is required">
-						<input class="input100" type="text" name="Username" placeholder="Username">
+						<input class="input100" 
+						type="username" 
+						name="username"
+						 placeholder="Username"
+						 value="<%= typeof username != 'undefined' ? username : '' %>"
+						 >
 						<span class="focus-input100-1"></span>
 						<span class="focus-input100-2"></span>
 					</div>
 
 					<div class="wrap-input100 rs1 validate-input" data-validate="Email Address is required example abc@xyz.com">
-						<input class="input100" type="text" name="Email" placeholder="Email Address">
+						<input class="input100" 
+						type="email" 
+						name="email" 
+						placeholder="Email Address"
+						value="<%= typeof email != 'undefined' ? email : '' %>"
+						>
 						<span class="focus-input100-1"></span>
 						<span class="focus-input100-2"></span>
 					</div>
 
 					<div class="wrap-input100 rs1 validate-input" data-validate="Password is required">
-						<input class="input100" type="password" name="pass" placeholder="Password">
+						<input class="input100" 
+						type="password"
+						 name="password" 
+						 placeholder="Password"
+						 value="<%= typeof password != 'undefined' ? password : '' %>"
+						 >
 						<span class="focus-input100-1"></span>
 						<span class="focus-input100-2"></span>
 					</div>
 
-					<div class="wrap-input100 rs1 validate-input" data-validate="Password is required">
-						<input class="input100" type="password" name="confirmpass" placeholder="Confirm Password">
+					 <div class="wrap-input100 rs1 validate-input" data-validate="Password is required">
+						<input class="input100" 
+						type="password" 
+						name="password2" 
+						placeholder="Confirm Password"
+						value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
+						>
 						<span class="focus-input100-1"></span>
 						<span class="focus-input100-2"></span>
-					</div>
+					</div> 
 
-					<div class="wrap-input100 rs1">
-						<input class="input100" type="text" name="Email" placeholder="Referral code: optional">
+					 <div class="wrap-input100 rs1">
+						<input class="input100" 
+						type="refcode" 
+						name="refcode" 
+						placeholder="Referral code: optional"
+						value="<%= typeof refcode != 'undefined' ? refcode : '' %>"
+						>
 						<span class="focus-input100-1"></span>
 						<span class="focus-input100-2"></span>
 					</div>
 
 					<div  class="wrap-input100 rs1 validate-input" data-validate="Secret Question is required">
 
-						<input id="fname" class="input100" type="text" name="fname" placeholder="Secret word   &mdash; &ldquo; Please do not share with anyone  &rdquo;">
+						<input class="input100"
+						 type="secret" 
+						 name="secret" 
+						 placeholder="Secret word   &mdash; &ldquo; Please do not share with anyone  &rdquo;"
+						 value="<%= typeof secret != 'undefined' ? secret : '' %>"
+						 >
 					  
 						<span class="focus-input100-1"></span>
 						<span class="focus-input100-2"></span>
@@ -58,11 +93,29 @@
 
 					
 
-					<div class="wrap-input100 rs1 validate-input" data-validate="Phone Number is required">
-						<input class="input100" type="tel" name="telephone" placeholder="Phone Number">
+					 <div class="wrap-input100 rs1 validate-input" data-validate="Phone Number is required">
+						<input class="input100"
+						 type="telephone" 
+						 name="telephone" 
+						 placeholder="Phone Number"
+						 value="<%= typeof telephone != 'undefined' ? telephone : '' %>"
+						 >
 						<span class="focus-input100-1"></span>
 						<span class="focus-input100-2"></span>
 					</div>
+					
+					<div>
+						<input type="hidden" name="totalAmount">
+					</div>
+
+					<div>
+					<input type="hidden" name="currentInvestment">
+					</div>
+
+					<div>
+						<input type="hidden" name="withdrawAmount">
+					</div>
+
 
 
 					
@@ -97,6 +150,8 @@
 			</div>
 		</div>
 	</div>
+
+</form>
 	
 
 	<%- include("./partials/logintail"); %>

@@ -35,43 +35,37 @@
       
   </div>
   <h2 data-aos="fade-up" class="investplans">Our Investment Plans</h2>
-  
   <div class="row">
-       
-    <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+    <% investplans.forEach(function(invest){ %>
 
-      <a href="/vendor" class="unit-9">
-        <div class="image" style="background-image: url('images/download (5).jpg ');"></div>
-        <div class="unit-9-content">
-          <h2>Ruby plan</h2>
-          <span>₦20,000 yields ₦28,000</span>
-          <span>Period of 30 days</span>
-        </div>
-      </a>
+    <div class="col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
+      <div  class="p-4 bg-white">
+        <span class="d-block text-secondary small text-uppercase"><%= invest.name%></span>
+        <h2 style="color: blue;" class=""><a href="/vendor"> <p><%= invest.amount%></p> 
+          <p style="font-size: 30px;">40% ROI</p>
+           <P><%= invest.period%></P> </span></a>
+          </h2>
+        
+      </div>
     </div>
 
-    <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-      <a href="/vendor" class="unit-9">
-        <div class="image" style="background-image: url('images/download (5).jpg');"></div>
-        <div class="unit-9-content">
-          <h2>Sapphire plan</h2>
-          <span>₦50,000 yields ₦70,000</span>
-          <span>Period of 30 days</span>
-        </div>
-      </a>
+    <% })%>
+
+    <!-- <div class="col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
+      <div class="p-4 bg-white">
+        <span class="d-block text-secondary small text-uppercase">Sapphire Package</span>
+        <h2 class="h5 text-black mb-3"><a href="/vendor">₦50,000 yields ₦70,000 <span>Period => 30 days</span></a></h2>
+        
+      </div>
     </div>
-    <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
-      <a href="/vendor" class="unit-9">
-        <div class="image" style="background-image: url('images/download (5).jpg');"></div>
-        <div class="unit-9-content">
-          <h2>Emerald plan</h2>
-          <span>₦100,000 yields ₦140,000</span>
-          <span>Period of 30 days</span>
-        </div>
-      </a>
+    <div class="col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="300">
+      <div class="p-4 bg-white">
+        <span class="d-block text-secondary small text-uppercase">Emerald Package</span>
+        <h2 class="h5 text-black mb-3"><a href="/vendor">₦100,000 yields ₦140,000 <span>Period => 30 days</span></a></h2>
+        
+      </div>
     </div>
-    
-  </div>
+  </div> -->
 </div>
 
 

@@ -1,0 +1,62 @@
+<%- include("./partials/header"); %>
+
+
+  <div>
+    <% if(currentUser) { %>
+      <h3 style="color: cornsilk;">Welcome, <%= currentUser.username %></h3>
+      <% } else { %>
+        <h3 style="color: cornsilk;">Welcome </h3>
+
+     <% } %>
+
+    </div>
+
+  <div>
+    <div>
+      <p style="color: white;"> Current Amount: ₦<%= currentUser.totalAmount %>  </p>
+    </div>
+  </div>
+
+<div> <p style="color: green; text-decoration: underline;"> Buy plans </p></div>
+<div class="row">
+  <div class="col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
+    <div class="p-4 bg-white">
+      <span class="d-block text-secondary small text-uppercase">Ruby Package</span>
+      <h2 class="h5 text-black mb-3"><a href="/myinvestment">₦20,000 yields ₦28,000 <span>Period => 30 days</span></a></h2>
+      
+    </div>
+  </div>
+  <div class="col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
+    <div class="p-4 bg-white">
+      <span class="d-block text-secondary small text-uppercase">Sapphire Package</span>
+      <h2 class="h5 text-black mb-3"><a href="/myinvestment">₦50,000 yields ₦70,000 <span>Period => 30 days</span></a></h2>
+      
+    </div>
+  </div>
+  <div class="col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="300">
+    <div class="p-4 bg-white">
+      <span class="d-block text-secondary small text-uppercase">Emerald Package</span>
+      <h2 class="h5 text-black mb-3"><a href="/myinvestment">₦100,000 yields ₦140,000 <span>Period => 30 days</span></a></h2>
+      
+    </div>
+  </div>
+</div>
+
+<div class="investment">
+  <div>
+  <h2 style="color: cornflowerblue;">  Active Investment: Ruby package ₦20,000 </h2>  <em style="color: aqua;"> &ldquo; To recieve ₦28,000 at end of 30 days &rdquo; </em> 
+     <div>
+      <h1 style="color: blueviolet;"> Investment matures in : </h1> <em id="demo"></em>
+      </div>
+
+  </div>
+</div>
+
+<div>
+  <div>
+    <h3 style="color: blueviolet;"> <%= currentUser.withdrawAmount %> </h3>
+    <a href="/withdraw"><p class="btn btn-primary"> Withdraw</p>  </a>
+  </div>
+</div>
+
+<%- include("./partials/footer"); %>
