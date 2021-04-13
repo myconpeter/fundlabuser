@@ -3,20 +3,50 @@
 //=================================================
 
 const express = require('express');
-const router = express.Router();
-const bcrypt = require('bcrypt');
-const passport = require('passport');
 const app = express();
+const mongoose= require('mongoose');
+
+ const bodyParser = require('body-parser');
+
+const bcrypt = require('bcrypt');
+const passports = require('passport');
+const sessions = require('express-session');
+const port = 4000; 
+
 
 
 var Admin  = require("../models/Admin")
 
+// mongoose connection
+
+mongoose.connect('mongodb://localhost/flamingo', {
+   useNewUrlParser: true,
+   useUnifiedTopology: true,
+  useFindAndModify: false,
+   useCreateIndex: true
+ })
+ .then(() => console.log('connected to db'))
+.catch((err)=> console.log(err)); 
+
 app.set('view engine','ejs');
 
+// POASSPORT CONFIGURATION
+app.use(sessions({
+    secret : 'mycon',
+    resave : true,
+    saveUninitialized : true
+}));
 
 
+app.use(passports.initialize());
+app.use(passports.session());
 
-router.use((req, res, next) => {
+require('../config/passport')
+
+app.use(bodyParser.urlencoded({extended: true}));
+
+
+app.use((req, res, next) => {
     res.locals.currentAdmin = req.user;
     next();
 });
@@ -26,37 +56,47 @@ router.use((req, res, next) => {
 
 // require('../config/passportx')(passportx)
 
+app.get('/adminpage',  (req, res)=>{
+   
+    console.log(req.user);
+    console.log(res.locals.currentAdmin)
+ 
+     res.render('adminpage' );
+ })
 
 
-router.get('/',  (req, res)=>{
+app.get('/',  (req, res)=>{
     res.render('adminlogin')
 })
 
-router.post('/', function(req, res, next) {
-    passport.authenticate('userAdmin', function(err, user, info) {
+app.post('/', function(req, res, next) {
+    passports.authenticate('userAdmin', function(err, user, info) {
       if (err) { errors.push({msg : "Invalid username or password"})    }
       if (!user) { return res.redirect('/admin'); }
       req.logIn(user, function(err) {
         if (err) { return next(err); }
-        return res.render('adminpage',{currentAdmin : req.user});
+        //  console.log(req.user)
+        return res.redirect('/admin/adminpage');
       });
     })(req, res, next);
   });
 
 
-// router.post('/', (req, res, next)=>{
-//     passport.authenticate('userAdmin',{
+// app.post('/', (req, res, next)=>{
+
+//     passport.authenticate('userAdmin', {
 //         successRedirect : '/admin/adminpage',
 //         failureRedirect: '/admin',
-//         failureFlash : true
+//         failureFlash : true,
+//         session: true
 //     })(req,res,next)
+//     // console.log(user)
 
-//     console.log(req.user)
 
 //     })
 
 
-    // router.post('/', 
+    // app.post('/', 
 
 
 
@@ -75,10 +115,6 @@ router.post('/', function(req, res, next) {
 // );
 
 
-router.get('/adminpage',   (req, res)=>{
-     console.log(req.user)
-    res.render('adminpage',);
-})
 
 
 
@@ -86,13 +122,14 @@ router.get('/adminpage',   (req, res)=>{
 
 
 
-router.get('/admincreate',  (req, res)=>{
+
+app.get('/admincreate',  (req, res)=>{
     res.render('admincreate')
 })
 
 
 
-router.post('/admincreate',(req,res)=>{
+app.post('/admincreate',(req,res)=>{
     const {email, password,transferAmount} = req.body;
     let errors = [];
     console.log( 'email :' + email+ ' pass:' + password +  'tranAmt:' + transferAmount );
@@ -166,17 +203,49 @@ router.post('/admincreate',(req,res)=>{
 //---SIGN IN ROUTE END HERE----
 //===============================================
 
+app.post('/transfer', (req,res)=>{
+    const {email,amount} =req.body;
+    let errors = [];
+    console.log('email: '+ email + '  amount: ' + amount);
+    if (!email || !amount){
+        errors.push({msg : 'please fill this form to transfer'});
+         res.render('adminpage', {currentAdmin : req.user} )
+    }
+if (isNaN(amount)) {
+    errors.push({msg : 'dbhhbk'})
+    res.render('adminpage')
+
+}
+
+    if(errors.length > 0 ) {
+        res.redirect('/admin/adminpage', {
+            errors : errors,
+            email : email,
+            amount : amount,
+    
+    
+        })
+    } else {
+        res.send('ujdwfbjehg')
+        // if the email is not i database return error
+        // find the admin and updata it total amount - amount
+        // find the user and add the total amount
+        //if succeful send transfer succeful
+        //
+    }
+})
+
     
 
     //logout
-router.get('/adminlogout',(req,res)=>{
+app.get('/adminlogout',(req,res)=>{
     req.logout();
     req.flash('success_msg','Now logged out');
     res.redirect('/admin'); 
-    }) 
+    });
 
     function ensureAuthenticated (req, res, next) {
-        if(req.isAuthenticated()) {
+        if(req.isAuthenticated('userAdmin')) {
             next()
         } else {
         req.flash('error_msg' , 'please login to view this resource');
@@ -221,10 +290,12 @@ router.get('/adminlogout',(req,res)=>{
 
 
 
-    module.exports  = router;
+    module.exports  = app;
 
 
-
+app.listen(port, ()=> {
+    console.log("Flamingo is now running");
+});
 
 //================================================
 //admin stop

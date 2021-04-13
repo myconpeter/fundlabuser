@@ -52,7 +52,7 @@ app.set('view engine','ejs');
 
  // POASSPORT CONFIGURATION
  app.use(session({
-    secret : 'secret',
+    secret : 'mycon',
     resave : true,
     saveUninitialized : true
 }));
@@ -85,19 +85,6 @@ app.use((req, res, next) => {
     res.locals.currentUser = req.user;
     next();
 });
-
-
-
-
-// admin route
-const adminRoutes = require("./routes/admin");
-
-
-
-app.use("/admin", adminRoutes);
-
-
-
 
 app.get('/', (req, res)=>{
     const invest = [
@@ -374,6 +361,7 @@ app.post('/withdraw', (req, res)=>{
 })
 
 app.get('/myinvestment', ensureAuthenticated, (req, res)=>{
+
     res.render('myinvest')
 })
 
