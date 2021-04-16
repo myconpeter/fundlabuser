@@ -1905,3 +1905,10 @@ figure figcaption {
   color: gold;
   font-size: 30px;
 }
+
+.endtext{
+  color:blue;
+  text-align: center;
+  font-style: italic;
+  font-family: cursive;
+}

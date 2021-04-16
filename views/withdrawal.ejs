@@ -1,44 +1,71 @@
 
 <%- include("./partials/loginhead"); %>
 
-    
+    <form action="/withdraw" method="POST">
 	
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
-				<form action="/myinvestment" class="login100-form validate-form">
+				<form class="login100-form validate-form">
 					<span class="login100-form-title p-b-33">
-						<a  href="/" class="btn btn-danger">Back</a>
+						<a  href="/myinvestment" class="btn btn-danger">Back</a>
 
 						Withdrawal
 					</span>
+					<%- include ('./partials/messages') %>
+
 
 					<div class="wrap-input100 validate-input" data-validate = "Valid Account Name is required">
-						<input class="input100" type="text" name="acctname" placeholder="Account Name">
+						<input class="input100" type="acctname" 
+						name="acctname"
+						placeholder="Account Name"
+						value="<%= typeof acctname != 'undefined' ? acctname : '' %>">
 						<span class="focus-input100-1"></span>
 						<span class="focus-input100-2"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Valid Account Number is required">
-						<input class="input100" type="text" name="acctnum" placeholder="Account Number">
+						<input class="input100" type="acctnum" 
+						name="acctnum" 
+						placeholder="Account Number"
+						value="<%= typeof acctnum != 'undefined' ? acctnum : '' %>">
+						
 						<span class="focus-input100-1"></span>
 						<span class="focus-input100-2"></span>
 					</div>
 
 					<div class="wrap-input100 rs1">
-						<input class="input100" type="text" name="amt" value="20000">
+						<input class="input100" type="hidden" name="amount">
 						<span class="focus-input100-1"></span>
 						<span class="focus-input100-2"></span>
 					</div>
 
 					<div class="wrap-input100 rs1 validate-input" data-validate="Bank Name is required">
-						<input class="input100" type="text" name="bankname" placeholder="Bank Name">
+						<input class="input100" type="bankname" 
+						name="bankname" 
+						placeholder="Bank Name"
+						value="<%= typeof bankname != 'undefined' ? bankname : '' %>">
+						
+						<span class="focus-input100-1"></span>
+						<span class="focus-input100-2"></span>
+					</div>
+
+					<div class="wrap-input100 rs1 validate-input" data-validate="Phone Number is required">
+						<input class="input100" type="telephone" 
+						name="telephone" 
+						placeholder="Phone Number"
+						value="<%= typeof telephone != 'undefined' ? telephone : '' %>">
+						
 						<span class="focus-input100-1"></span>
 						<span class="focus-input100-2"></span>
 					</div>
 
 					<div class="wrap-input100 rs1 validate-input" data-validate="Password is required">
-						<input class="input100" type="password" name="confirmpass" placeholder="Confirm Password">
+						<input class="input100" type="secret" 
+						name="secret" 
+						placeholder="Confirm Password"
+						value="<%= typeof secret != 'undefined' ? secret : '' %>">
+						
 						<span class="focus-input100-1"></span>
 						<span class="focus-input100-2"></span>
 					</div>
@@ -46,11 +73,7 @@
 
 					
 
-					<div class="wrap-input100 rs1 validate-input" data-validate="Phone Number is required">
-						<input class="input100" type="tel" name="telephone" placeholder="Phone Number">
-						<span class="focus-input100-1"></span>
-						<span class="focus-input100-2"></span>
-					</div>
+					
 
 
 					
@@ -64,7 +87,7 @@
 					
 
 					<div class="container-login100-form-btn m-t-20">
-						<button class="login100-form-btn">
+						<button class="login100-form-btn" type="submit"> 
 						Withdraw
 						</button>
 					</div>
@@ -76,6 +99,8 @@
 			</div>
 		</div>
 	</div>
+
+</form>
 	
 
 	<%- include("./partials/logintail"); %>

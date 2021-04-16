@@ -1,7 +1,7 @@
 <%- include("./partials/header"); %>
 
 
-  <div>
+
     <% if(currentUser) { %>
       <h3 style="color: cornsilk;">Welcome, <%= currentUser.username %></h3>
       <% } else { %>
@@ -17,30 +17,32 @@
     </div>
   </div>
 
-<div> <p style="color: green; text-decoration: underline;"> Buy plans </p></div>
+<div> <a href='/investnow' style="color: green; text-decoration: underline;"> invest now !!! </a></div>
+
+<!-- <form action="/investnow" method="POST"></form>
 <div class="row">
+  <% investplans.forEach(function(invest){ %>
+
   <div class="col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
-    <div class="p-4 bg-white">
-      <span class="d-block text-secondary small text-uppercase">Ruby Package</span>
-      <h2 class="h5 text-black mb-3"><a href="/myinvestment">₦20,000 yields ₦28,000 <span>Period => 30 days</span></a></h2>
+    <div  class="p-4 bg-white">
+      <span class="d-block text-secondary small text-uppercase"><%= invest.name%></span>
+      <h2 style="color: blue;" class=""><a method='post' href="/investnow"> <p><%= invest.amount%></p> 
+        <p style="font-size: 30px;">55 % ROI</p>
+         <P><%= invest.period%></P> </span></a>
+         <input type="hidden">
+         <input type="hidden">
+         <input type="hidden">
+         <input type="submit" name="" id="" value="Buy package">
+        </h2>
       
     </div>
   </div>
-  <div class="col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
-    <div class="p-4 bg-white">
-      <span class="d-block text-secondary small text-uppercase">Sapphire Package</span>
-      <h2 class="h5 text-black mb-3"><a href="/myinvestment">₦50,000 yields ₦70,000 <span>Period => 30 days</span></a></h2>
-      
-    </div>
-  </div>
-  <div class="col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="300">
-    <div class="p-4 bg-white">
-      <span class="d-block text-secondary small text-uppercase">Emerald Package</span>
-      <h2 class="h5 text-black mb-3"><a href="/myinvestment">₦100,000 yields ₦140,000 <span>Period => 30 days</span></a></h2>
-      
-    </div>
-  </div>
-</div>
+
+  <% })%>
+</div> -->
+
+
+
 
 <div class="investment">
   <div>
@@ -54,7 +56,7 @@
 
 <div>
   <div>
-    <h3 style="color: blueviolet;"> <%= currentUser.withdrawAmount %> </h3>
+    <h3 style="color: blueviolet;"> <%= currentUser.totalAmount %> </h3>
     <a href="/withdraw"><p class="btn btn-primary"> Withdraw</p>  </a>
   </div>
 </div>

@@ -1,5 +1,4 @@
 <%- include("./partials/loginhead"); %>
-<%- include("./partials/messages"); %>
 
 
     <form action="/login" method="POST">
@@ -15,6 +14,8 @@
 
                         Login
 					</span>
+					<%- include("./partials/messages"); %>
+
 
 					<div class="wrap-input100 validate-input" data-validate = "Valid Username is required: abc@xyz.com">
 						<input class="input100" type="email" name="email" placeholder="Email">

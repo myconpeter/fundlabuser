@@ -13,6 +13,7 @@ const session = require('express-session');
 const LocalStrategy = require("passport-local");
 const User = require("./models/user");
 const Admin = require('./models/Admin');
+const Withdrawal = require('./models/Withdrawal')
 
 
 
@@ -33,6 +34,12 @@ require('./config/passport')
 
 
 // mongoose connection
+
+//  mongoose.connect('mongodb+srv://flamingo:123456789@cluster0.0afwt.mongodb.net/flamingo?retryWrites=true&w=majority', {
+//     useUnifiedTopology: true,
+//    useFindAndModify: false,
+//    useCreateIndex: true
+//  });
 
 mongoose.connect('mongodb://localhost/flamingo', {
    useNewUrlParser: true,
@@ -88,9 +95,14 @@ app.use((req, res, next) => {
 
 app.get('/', (req, res)=>{
     const invest = [
-        {name: "Ruby package", amount: 20000, period: "30 days"},
-        {name: "Sapphire package", amount: 50000, period: "30 days"},
-        {name: "Emerald package", amount: 100000, period: "30 days"},
+        {name: "Jasper", amount: 5000, returns:"55%", period: "30 days"},
+        {name: "Sapphire", amount: 10000, returns:"55%", period: "30 days"},
+
+        {name: "Chalcedony", amount: 20000, returns:"55%", period: "30 days"},
+        {name: "Emerald", amount: 50000, returns:"55%", period: "30 days"},
+        {name: "Sardonxy", amount: 70000, returns:"55%", period: "30 days"},
+
+        {name: "Sarduis", amount: 100000, returns:"55%", period: "30 days"},
     ]
     res.render('index.ejs', {investplans: invest, currentUser: req.user})
 })
@@ -191,7 +203,7 @@ app.post('/signup',(req,res)=>{
        User.findOne({email : email}).exec((err, user)=>{
         console.log(user);   
         if(user) {
-            errors.push({msg: 'email already registered'});
+            errors.push({msg: 'email already registered, please choose another'});
             res.render('signup',{errors,fullname,username,email,password,password2,refcode,secret,telephone})  
            } else {
             const newUser = new User({
@@ -250,6 +262,7 @@ app.post('/forgetpassword',(req,res)=>{
     console.log( 'username :' + username+ ' secret:' + secret);
     if(!username || !secret) {
         errors.push({msg : "Please fill in all fields"})
+
     }
     //check if match
     
@@ -266,20 +279,10 @@ app.post('/forgetpassword',(req,res)=>{
        User.findOne({username : username, secret : secret}).exec((err, correctdetails)=>{
         console.log(correctdetails);   
         if(!correctdetails) {
-            errors.push({msg: 'this username does not match'});
+            errors.push({msg: 'this username and secret does not match'});
             res.render('forgetpassword',{username,secret})  
            } else {
                res.redirect('/newpassword')
-           
-
-            // const newAdmin = new Admin({
-
-            //     // email : email,
-            //     // password : password,
-            //     // transferAmount : transferAmount
-
-
-            // });
     
            
              }
@@ -323,7 +326,8 @@ app.post('/newpassword', (req, res)=>{
                                     newpassword = hash;
                                     console.log('newpassword : ' + newpassword)
 
-                                    User.updateOne({ password: newpassword },  function(err, data){
+                                    User.updateMany({ password: newpassword },  function(err, data){
+                                        console.log(data)
                                         if(err){
                                             console.log(err)
                                         } else {
@@ -350,19 +354,180 @@ app.post('/newpassword', (req, res)=>{
 //=========================================
 
 
-app.get('/withdraw', (req, res)=>{
-    res.render('withdrawal')
-
-})
-
-app.post('/withdraw', (req, res)=>{
-// check if amount is able to withdraw
+app.get('/withdraw', ensureAuthenticated, (req, res)=>{
     
+   res.render('withdrawal') 
+
+
 })
+
+
+
+
+    app.post('/withdraw',(req,res)=>{
+        
+        const {acctname, acctnum, bankname, telephone,  secret} = req.body;
+        let errors = [];
+        console.log(' acctname:' + acctname+ 'acctnum:' + acctnum + 'bankname :' + bankname+ ' telephone:' + telephone + ' secret:' + secret)
+        if(!acctname || !acctnum || !bankname || !telephone || !secret ) {
+            errors.push({msg : "Please fill in all fields"})
+        }
+        //check if match
+        
+        
+        //check if password is more than 6 characters
+       
+        if(errors.length > 0 ) {
+        res.render('withdrawal', {
+            errors : errors,
+            acctname : acctname,
+            acctnum : acctnum,
+            bankname : bankname,
+    
+            telephone : telephone,
+            secret : secret,
+            
+    
+    
+        })
+         } else {
+            //validation passed
+           User.findOne({secret : secret}).exec((err, realuser)=>{
+            console.log(realuser);   
+            if(!realuser) {
+                errors.push({msg: 'Please enter your users secret'});
+                res.render('withdrawal',{errors,acctname,acctnum,bankname,telephone,secret})  
+               } else {
+                const newWithdrawal = new Withdrawal({
+                    acctname : acctname,
+                    acctnum : acctnum,
+    
+                    bankname : bankname,
+                    telephone : telephone,
+                    secret : secret,    
+                });
+                newWithdrawal.save()
+                .then((value)=>{
+                    console.log(value)
+                    req.flash('success_msg','You have successfilly placed a withdrawalal!');
+                    res.redirect('/withdraw');
+                })
+                .catch(value=> console.log(value));                
+                 }
+           })
+        }
+        })
+    
+
+// check if amount is able to withdraw
+    //==========================================
+    //==========================================
+    //========================================
+
+
+
+
+
+
+    //============================================================================================
+    //============================================================================================
+    //============================================================================================
+app.get('/investnow', ensureAuthenticated, (req, res)=>{
+    res.render('investnow')
+})
+
+app.post('/investnow', ensureAuthenticated, (req, res)=>{
+const name = req.body;
+// console.log(name)
+
+const totalamt = req.user.totalAmount
+// console.log(totalamt)
+
+if (totalamt < 5000 ){
+    console.log('cannotbuy')
+    res.redirect('/myinvestment');
+} else{
+    User.updateOne({totalAmount: (totalamt-5000)}, function(err, investuser){
+        console.log(investuser)
+        if (err){
+            console.log(err)
+        } else {
+            res.redirect('/myinvestment');
+        }
+    })
+}
+
+
+
+
+    // res.render('investnow')
+})
+
+
+
+
+
+
+    //==============================================================================================
+    //==============================================================================================
+    //=====================================================================================
+
 
 app.get('/myinvestment', ensureAuthenticated, (req, res)=>{
 
-    res.render('myinvest')
+    const invest = [
+        {name: "Jasper", amount: '5k', returns:"55%", period: "30 days"},
+        {name: "Sapphire", amount: '10', returns:"55%", period: "30 days"},
+
+        {name: "Chalcedony", amount: 20000, returns:"55%", period: "30 days"},
+        {name: "Emerald", amount: 50000, returns:"55%", period: "30 days"},
+        {name: "Sardonxy", amount: 70000, returns:"55%", period: "30 days"},
+
+        {name: "Sarduis", amount: 100000, returns:"55%", period: "30 days"},
+    ]
+    // console.log(req.user)
+
+
+    const recieve = req.user.recievedAmount;
+    // console.log(recieve);
+
+    const amount = req.user.totalAmount;
+    // console.log(amount);
+
+    const total = req.user.totalAmount;
+    // console.log(amount);
+
+    const allcash = recieve + amount;
+        console.log(allcash);
+
+
+
+    User.updateOne({totalAmount: allcash}, function(err, data) {
+                           
+        console.log(data)
+
+        if (err) {
+            console.log('not transfer')
+         } //else {
+        //     User.updateOne({recievedAmount : 0}, function(err, data){
+       
+        //     })
+        // }
+         
+    });
+
+    // User.updateOne({recievedAmount : 0}, function(err, data){
+       
+   // })
+
+
+
+
+
+
+    
+
+    res.render('myinvest', {investplans: invest})
 })
 
 
