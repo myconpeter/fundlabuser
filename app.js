@@ -388,7 +388,7 @@ if (total < 1000){
 
 
 
-    app.post('/withdraw',(req,res)=>{
+    app.post('/withdraw',ensureAuthenticated, (req,res)=>{
         
         const {acctname, acctnum, bankname, telephone,  secret} = req.body;
         let errors = [];
