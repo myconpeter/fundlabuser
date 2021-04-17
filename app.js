@@ -34,7 +34,7 @@ require('./config/passport')
 
 // mongodb connection
 
- mongoose.connect('mongodb+srv://mycon:michealpeter@cluster0.sjfe1.mongodb.net/flamingo?retryWrites=true&w=majority', {
+ mongoose.connect('mongodb+srv://flamingo:michealpeter@cluster0.pa829.mongodb.net/flamingo?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
