@@ -30,25 +30,27 @@ const PORT  = process.env.PORT || 8000;
 
 //passport config:
 require('./config/passport')
-// require('./config/passportx')(passportx)
 
 
-// mongoose connection
+// mongodb connection
 
-//  mongoose.connect('mongodb+srv://flamingo:123456789@cluster0.0afwt.mongodb.net/flamingo?retryWrites=true&w=majority', {
-//     useUnifiedTopology: true,
-//    useFindAndModify: false,
-//    useCreateIndex: true
-//  });
-
-mongoose.connect('mongodb://localhost/flamingo', {
-   useNewUrlParser: true,
-   useUnifiedTopology: true,
+ mongoose.connect('mongodb+srv://mycon:michealpeter@cluster0.sjfe1.mongodb.net/flamingoexpress?retryWrites=true&w=majority', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
   useFindAndModify: false,
-   useCreateIndex: true
- })
- .then(() => console.log('connected to db'))
-.catch((err)=> console.log(err)); 
+  useCreateIndex: true
+});
+
+
+// local connection
+// mongoose.connect('mongodb://localhost/flamingo', {
+//    useNewUrlParser: true,
+//    useUnifiedTopology: true,
+//   useFindAndModify: false,
+//    useCreateIndex: true
+//  })
+//  .then(() => console.log('connected to db'))
+// .catch((err)=> console.log(err)); 
 
 
 //EJS
