@@ -25,7 +25,12 @@
       <div  class="p-4 bg-white">
         <span class="d-block text-secondary small text-uppercase"></span>
         <h2 style="color: blue;" class=""><p style="text-align: center;">Active Investment:</p> 
-          <p style="font-size: 30px; text-align: center;"><%= currentUser.isInvested %></p>
+
+          <% if (currentUser.isInvested == false) { %>
+          <p style="font-size: 30px; text-align: center;">No Ongoing investment</p>
+          <% }else{%>
+            <p style="font-size: 30px; text-align: center;">Active plan running</p>
+          <% } %>
            <P></P> </span></a>
           </h2>
         
