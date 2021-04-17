@@ -1,64 +1,76 @@
 <%- include("./partials/header"); %>
+<%- include("./partials/messages"); %>
 
 
 
-    <% if(currentUser) { %>
-      <h3 style="color: cornsilk;">Welcome, <%= currentUser.username %></h3>
-      <% } else { %>
-        <h3 style="color: cornsilk;">Welcome </h3>
+<h2 data-aos="fade-up" class="investplans"> DASHBOARD</h2>
+  <div class="row">
 
-     <% } %>
+    <div class="col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
+      <div  class="p-4 bg-dark">
+        <span class="d-block text-secondary small text-uppercase"></span>
+        <h2 style="color: blue;" class=""><p> Current Amount : </p> 
+          <p style="font-size: 30px;"> ₦ <%= currentUser.totalAmount %></p>
+           <P></P> </span></a>
+          </h2>
+          <div>
+             <a class="btn btn-success" href='/investnow' style="color: green; margin-left: 100px;"> INVEST NOW</a>
 
-    </div>
-
-  <div>
-    <div>
-      <p style="color: white;"> Current Amount: ₦<%= currentUser.totalAmount %>  </p>
-    </div>
-  </div>
-
-<div> <a href='/investnow' style="color: green; text-decoration: underline;"> invest now !!! </a></div>
-
-<!-- <form action="/investnow" method="POST"></form>
-<div class="row">
-  <% investplans.forEach(function(invest){ %>
-
-  <div class="col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
-    <div  class="p-4 bg-white">
-      <span class="d-block text-secondary small text-uppercase"><%= invest.name%></span>
-      <h2 style="color: blue;" class=""><a method='post' href="/investnow"> <p><%= invest.amount%></p> 
-        <p style="font-size: 30px;">55 % ROI</p>
-         <P><%= invest.period%></P> </span></a>
-         <input type="hidden">
-         <input type="hidden">
-         <input type="hidden">
-         <input type="submit" name="" id="" value="Buy package">
-        </h2>
-      
-    </div>
-  </div>
-
-  <% })%>
-</div> -->
-
-
-
-
-<div class="investment">
-  <div>
-  <h2 style="color: cornflowerblue;">  Active Investment: Ruby package ₦20,000 </h2>  <em style="color: aqua;"> &ldquo; To recieve ₦28,000 at end of 30 days &rdquo; </em> 
-     <div>
-      <h1 style="color: blueviolet;"> Investment matures in : </h1> <em id="demo"></em>
+          </div>
       </div>
+    </div>
 
-  </div>
+
+    <div class="col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
+      <div  class="p-4 bg-white">
+        <span class="d-block text-secondary small text-uppercase"></span>
+        <h2 style="color: blue;" class=""><p style="text-align: center;">Active Investment:</p> 
+          <p style="font-size: 30px; text-align: center;"><%= currentUser.isInvested %></p>
+           <P></P> </span></a>
+          </h2>
+        
+      </div>
+    </div>
+
+
+    <div class="col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
+      <div  class="p-4 bg-dark">
+        <span class="d-block text-secondary small text-uppercase"></span>
+        <h2 style="color: blue;" class=""><p>Withdrawable Amount: </p> 
+          <p style="font-size: 30px;"> ₦ <%= currentUser.totalAmount %></p>
+           <P></P> </span></a>
+          </h2>
+
+          <div>
+            <a href="/withdraw"><p style="margin-left: 100px;" class="btn btn-primary"> Withdraw</p>  </a>
+          </div>
+        
+      </div>
+    </div>
+
+    
 </div>
 
+
+
+
+
+
+
+ 
+    
+
+</div>
+
+</div>
+
+
+
+
+
+
 <div>
-  <div>
-    <h3 style="color: blueviolet;"> <%= currentUser.totalAmount %> </h3>
-    <a href="/withdraw"><p class="btn btn-primary"> Withdraw</p>  </a>
-  </div>
+  
 </div>
 
 <%- include("./partials/footer"); %>

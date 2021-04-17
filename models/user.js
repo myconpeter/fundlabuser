@@ -54,6 +54,10 @@ recievedAmount: {
          default: 0 
         },
     
+isInvested: {
+    type :Boolean,
+    default : false
+},
 
 
 
