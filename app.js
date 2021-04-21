@@ -34,23 +34,23 @@ require('./config/passport')
 
 // mongodb connection
 
- mongoose.connect("mongodb+srv://flamingo:michealisaman@cluster0.hknyx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-  useCreateIndex: true
-});
+//  mongoose.connect("mongodb+srv://flamingo:michealisaman@cluster0.hknyx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+//   useFindAndModify: false,
+//   useCreateIndex: true
+// });
 
 
 // local connection
-// mongoose.connect('mongodb://localhost/flamingo', {
-//    useNewUrlParser: true,
-//    useUnifiedTopology: true,
-//   useFindAndModify: false,
-//    useCreateIndex: true
-//  })
-//  .then(() => console.log('connected to db'))
-// .catch((err)=> console.log(err)); 
+mongoose.connect('mongodb://localhost/flamingo', {
+   useNewUrlParser: true,
+   useUnifiedTopology: true,
+  useFindAndModify: false,
+   useCreateIndex: true
+ })
+ .then(() => console.log('connected to db'))
+.catch((err)=> console.log(err)); 
 
 
 //EJS
@@ -185,6 +185,25 @@ app.post('/signup',(req,res)=>{
     if(password.length < 6 ) {
         errors.push({msg : 'password atleast 6 characters'})
     }
+// =================================================================
+// =================================================================
+// referral code part ----------------------------------------------
+
+
+// User.findOne({telephone : refcode}).exec((err, user)=>{
+//     if(!user) {
+//         errors.push({msg: 'Referral code is invalid'});
+//         res.render('signup',{errors,fullname,username,email,password,password2,refcode,secret,telephone}) 
+//        }
+// })
+
+
+ 
+
+
+
+    // ========================================================
+//============================================================
     if(errors.length > 0 ) {
     res.render('signup', {
         errors : errors,
@@ -201,44 +220,56 @@ app.post('/signup',(req,res)=>{
 
     })
      } else {
+        User.findOne({telephone : refcode}).exec((err, ref)=>{
+            if(!ref) {
+                errors.push({msg: 'Referral code is invalid'});
+                res.render('signup',{errors,fullname,username,email,password,password2,refcode,secret,telephone}) 
+               }  else {
+
+                User.findOne({email : email}).exec((err, user)=>{
+                    console.log(user);   
+                    if(user) {
+                        errors.push({msg: 'email already registered, please choose another'});
+                        res.render('signup',{errors,fullname,username,email,password,password2,refcode,secret,telephone})  
+                       } 
+                       
+                       else {
+                        const newUser = new User({
+                            fullname : fullname,
+                            username : username,
+            
+                            email : email,
+                            password : password,
+                            refcode : refcode,
+                            secret : secret,
+                            telephone : telephone
+            
+                        });
+                
+                        //hash password
+                        bcrypt.genSalt(10,(err,salt)=> 
+                        bcrypt.hash(newUser.password,salt,
+                            (err,hash)=> {
+                                if(err) throw err;
+                                    //save pass to hash
+                                    newUser.password = hash;
+                                //save user
+                                newUser.save()
+                                .then((value)=>{
+                                    console.log(value)
+                                    req.flash('success_msg','You have now registered!');
+                                    res.redirect('/login');
+                                })
+                                .catch(value=> console.log(value));
+                                  
+                            }));
+                         }
+                   })
+
+              }
+        })
         //validation passed
-       User.findOne({email : email}).exec((err, user)=>{
-        console.log(user);   
-        if(user) {
-            errors.push({msg: 'email already registered, please choose another'});
-            res.render('signup',{errors,fullname,username,email,password,password2,refcode,secret,telephone})  
-           } else {
-            const newUser = new User({
-                fullname : fullname,
-                username : username,
-
-                email : email,
-                password : password,
-                refcode : refcode,
-                secret : secret,
-                telephone : telephone
-
-            });
-    
-            //hash password
-            bcrypt.genSalt(10,(err,salt)=> 
-            bcrypt.hash(newUser.password,salt,
-                (err,hash)=> {
-                    if(err) throw err;
-                        //save pass to hash
-                        newUser.password = hash;
-                    //save user
-                    newUser.save()
-                    .then((value)=>{
-                        console.log(value)
-                        req.flash('success_msg','You have now registered!');
-                        res.redirect('/login');
-                    })
-                    .catch(value=> console.log(value));
-                      
-                }));
-             }
-       })
+       
     }
     })
 
@@ -373,7 +404,7 @@ app.get('/withdraw', ensureAuthenticated, (req, res)=>{
 const total = req.user.totalAmount
 console.log(total);
 
-if (total < 1000){
+if (total < 10000){
     req.flash('error_msg' , 'You cannot withdraw this amount, Please fund your account');
 
     res.redirect('/myinvestment');
@@ -392,16 +423,26 @@ if (total < 1000){
 
     app.post('/withdraw',ensureAuthenticated, (req,res)=>{
         
-        const {acctname, acctnum, bankname, telephone,  secret} = req.body;
+        const {email, acctname, acctnum, bankname, telephone,  secret} = req.body;
         let errors = [];
-        console.log(' acctname:' + acctname+ 'acctnum:' + acctnum + 'bankname :' + bankname+ ' telephone:' + telephone + ' secret:' + secret)
-        if(!acctname || !acctnum || !bankname || !telephone || !secret ) {
+        console.log('acctname: ' + acctname+ 'email: ' + email + 'acctnum: ' + acctnum + 'bankname: ' + bankname+ ' telephone: ' + telephone + ' secret: ' + secret)
+        if(!acctname || !email || !acctnum || !bankname || !telephone || !secret ) {
             errors.push({msg : "Please fill in all fields"})
         }
         //check if match
         
         
         //check if password is more than 6 characters
+
+        User.findOne({email: email}, (err, withdraw)=>{
+           
+            if (err){
+                console.log(err)
+            } else{
+                console.log(withdraw)
+            }
+            
+        })
        
         if(errors.length > 0 ) {
         res.render('withdrawal', {
@@ -435,8 +476,8 @@ if (total < 1000){
                 newWithdrawal.save()
                 .then((value)=>{
                     console.log(value)
-                    req.flash('success_msg','You have successfilly placed a withdrawalal!');
-                    res.redirect('/withdraw');
+                    req.flash('success_msg','You have successfilly placed a withdrawal!');
+                    res.redirect('/myinvest');
                 })
                 .catch(value=> console.log(value));                
                  }
@@ -460,7 +501,7 @@ if (total < 1000){
     //============================================================================================
 app.get('/investnow', ensureAuthenticated, (req, res)=>{
 const isInvest = req.user.isInvested
-console.log(isInvest);
+// console.log(isInvest);
 
 
 if (isInvest === false){
@@ -488,19 +529,20 @@ if (isInvest === false){
 
 app.post('/investnow1', ensureAuthenticated, (req, res)=>{
 
-    const invest = [
-        {name: "Jasper", amount: 5000, returns:"55%", period: "30 days"},
-    ]
-
 
     const email = req.user.email;
-    console.log(email)
+    // console.log(email)
     const totalamount = req.user.totalAmount
-    console.log(totalamount)
+    // console.log(totalamount)
     const invset = 5000;
     const isinvest = req.user.isInvested;
+    const msg = "Jasper Package, ROI : 7,750 ";
     // console.log(isinvest)
     const idd = req.user.id;
+    const refId = req.user.refcode
+    console.log(refId)
+    const refcodebonus = req.user.refCodeBonus
+    // console.log(refcodebonus);
 
 
     if (totalamount < invset){
@@ -511,18 +553,26 @@ app.post('/investnow1', ensureAuthenticated, (req, res)=>{
     }
     
     else{
-        // const invest1[
-        //         {}
-        // ]
-        User.findByIdAndUpdate(idd, {totalAmount : (totalamount - invset ), isInvested : true}, (err, possible)=>{
+
+        // User.findOne({telephone : refId}).exec((err, addBonusTo)=>{
+        //     console.log(addBonusTo)
+        // })
+
+       
+
+        
+        
+        User.findByIdAndUpdate(idd, {totalAmount : (totalamount - invset ), isInvested : true, currentInvestment: invset, investPlans : msg, investedDate: new Date(), investedMatureDate : new Date(+new Date() + 30*24*60*60*1000)}, (err, possible)=>{
             req.flash('success_msg','You have successfully bought an investment plan!');
 
             res.redirect('/myinvestment');
 
         }
         )
-        //  res.send('possible');
     }
+
+    // User.findByIdAndUpdate(idd, {refamount : 1000})
+
 
 
  })
@@ -536,6 +586,8 @@ app.post('/investnow1', ensureAuthenticated, (req, res)=>{
     const invset = 10000;
     const isinvest = req.user.isInvested;
     const idd = req.user.id;
+    const msg = "Sapphire Package, ROI : 15,500 ";
+
 
 
 
@@ -545,7 +597,7 @@ app.post('/investnow1', ensureAuthenticated, (req, res)=>{
 
         res.redirect('/myinvestment')
     } else{
-        User.findByIdAndUpdate(idd, {totalAmount : (totalamount - invset ), isInvested : true}, (err, possible)=>{
+        User.findByIdAndUpdate(idd, {totalAmount : (totalamount - invset ), isInvested : true, currentInvestment: invset, investPlans : msg, investedDate: new Date(), investedMatureDate : new Date(+new Date() + 30*24*60*60*1000)}, (err, possible)=>{
             req.flash('success_msg','You have successfully bought an investment plan!');
 
             res.redirect('/myinvestment');
@@ -563,6 +615,8 @@ app.post('/investnow1', ensureAuthenticated, (req, res)=>{
     const invset = 20000;
     const isinvest = req.user.isInvested;
     const idd = req.user.id;
+    const msg = "Chalcedony Package, ROI : 31,000 ";
+
 
 
 
@@ -573,7 +627,7 @@ app.post('/investnow1', ensureAuthenticated, (req, res)=>{
         res.redirect('/myinvestment')
 
     } else{
-        User.findByIdAndUpdate(idd, {totalAmount : (totalamount - invset ), isInvested : true}, (err, possible)=>{
+        User.findByIdAndUpdate(idd, {totalAmount : (totalamount - invset ), isInvested : true, currentInvestment: invset, investPlans : msg, investedDate: new Date(), investedMatureDate : new Date(+new Date() + 30*24*60*60*1000)}, (err, possible)=>{
             req.flash('success_msg','You have successfully bought an investment plan!');
 
             res.redirect('/myinvestment');
@@ -593,6 +647,8 @@ app.post('/investnow1', ensureAuthenticated, (req, res)=>{
     const invset = 50000;
     const isinvest = req.user.isInvested;
     const idd = req.user.id;
+    const msg = "Emerald Package, ROI : 77,500 ";
+
 
 
 
@@ -602,7 +658,7 @@ app.post('/investnow1', ensureAuthenticated, (req, res)=>{
         res.redirect('/myinvestment')
 
     } else{
-        User.findByIdAndUpdate(idd, {totalAmount : (totalamount - invset ), isInvested : true}, (err, possible)=>{
+        User.findByIdAndUpdate(idd, {totalAmount : (totalamount - invset ), isInvested : true, currentInvestment: invset, investPlans : msg, investedDate: new Date(), investedMatureDate : new Date(+new Date() + 30*24*60*60*1000)}, (err, possible)=>{
             req.flash('success_msg','You have successfully bought an investment plan!');
 
             res.redirect('/myinvestment');
@@ -623,6 +679,8 @@ app.post('/investnow1', ensureAuthenticated, (req, res)=>{
     const invset = 70000;
     const isinvest = req.user.isInvested;
     const idd = req.user.id;
+    const msg = "Sardonxy Package, ROI : 108,500";
+
 
 
 
@@ -633,7 +691,7 @@ app.post('/investnow1', ensureAuthenticated, (req, res)=>{
         res.redirect('/myinvestment')
 
     } else{
-        User.findByIdAndUpdate(idd, {totalAmount : (totalamount - invset), isInvested : true}, (err, possible)=>{
+        User.findByIdAndUpdate(idd, {totalAmount : (totalamount - invset ), isInvested : true, currentInvestment: invset, investPlans : msg, investedDate: new Date(), investedMatureDate : new Date(+new Date() + 30*24*60*60*1000)}, (err, possible)=>{
             req.flash('success_msg','You have successfully bought an investment plan!');
 
             res.redirect('/myinvestment');
@@ -652,7 +710,8 @@ app.post('/investnow1', ensureAuthenticated, (req, res)=>{
     const invset = 100000;
     const isinvest = req.user.isInvested;
     const idd = req.user.id;
-    // console.log(idd)
+    const msg = "Sarduis Package, ROI : 155,000";
+
 
 
 
@@ -662,7 +721,7 @@ app.post('/investnow1', ensureAuthenticated, (req, res)=>{
         res.redirect('/myinvestment')
 
     } else{
-        User.findByIdAndUpdate(idd, {totalAmount : (totalamount - invset ), isInvested : true}, (err, possible)=>{
+        User.findByIdAndUpdate(idd, {totalAmount : (totalamount - invset ), isInvested : true, currentInvestment: invset, investPlans : msg, investedDate: new Date(), investedMatureDate : new Date(+new Date() + 30*24*60*60*1000)}, (err, possible)=>{
             req.flash('success_msg','You have successfully bought an investment plan!');
 
             res.redirect('/myinvestment');
@@ -683,7 +742,7 @@ app.post('/investnow1', ensureAuthenticated, (req, res)=>{
 
 app.get('/myinvestment', ensureAuthenticated, (req, res)=>{
    const recieve = req.user.recievedAmount;
-    console.log(recieve);
+    // console.log(recieve);
 
     const amount = req.user.totalAmount;
 
@@ -692,7 +751,7 @@ app.get('/myinvestment', ensureAuthenticated, (req, res)=>{
     const allcash = recieve + amount;
     
     const idd = req.user.id;
-    console.log(idd);
+    // console.log(idd);
 
     User.findByIdAndUpdate(idd, {totalAmount: allcash}, (err, money)=>{
         if(err){

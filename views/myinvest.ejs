@@ -29,7 +29,7 @@
           <% if (currentUser.isInvested == false) { %>
           <p style="font-size: 30px; text-align: center;">No Ongoing investment</p>
           <% }else{%>
-            <p style="font-size: 30px; text-align: center;">Active plan running</p>
+            <p style="font-size: 30px; text-align: center;"><%= currentUser.investPlans %></p>
           <% } %>
            <P></P> </span></a>
           </h2>

@@ -59,12 +59,41 @@ isInvested: {
     default : false
 },
 
+refCodeBonus: {
+    type :Boolean,
+    default : false
+},
+
+investPlans: {
+    type :String,
+},
+
+investedDate: {
+    type: Date,
+    // default : new Date
+
+},
+
+investedMatureDate: {
+    type: Date,
+    // default : new Date
+
+},
+
+isWithdrawable: {
+    type: Boolean,
+    default : false
+
+},
+
+
 
 
 date :{
     type : Date,
-    default : Date.now
+    default : Date.now()
 }
+
 });
 
 

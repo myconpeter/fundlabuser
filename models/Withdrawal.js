@@ -2,6 +2,11 @@ const mongoose = require('mongoose');
 // const bcrypt = require('bcrypt');
 
 const WithdrawalSchema  = new mongoose.Schema({
+email :{
+        type  : String,
+        required : true
+    } ,
+
 acctname :{
       type  : String,
       required : true
