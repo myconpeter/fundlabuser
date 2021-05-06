@@ -30,7 +30,31 @@
           <p style="font-size: 30px; text-align: center;">No Ongoing investment</p>
           <% }else{%>
             <p style="font-size: 30px; text-align: center;"><%= currentUser.investPlans %></p>
+            <h1 id="demo" style="text-align: center; color: green;"></h1>
+            <p style="color:green;"><span>Investment Maturity Date :</span>  <em><%= currentUser.investedMatureDate.toDateString() %></em> </p>
+
+            <div class="progress progress-lg">
+              <div 
+               class="progress-bar bg-primary"
+               role="progressbar" aria-valuenow="<%= new Date()%>" 
+               aria-valuemin="<%= currentUser.investedDate %>" aria-valuemax="<%= currentUser.investedMatureDate %>" 
+               style="width:100%; animation: 3s ease 1s 1 normal running animate-positive; opacity: 1;">
+              </div>
+            </div>
           <% } %>
+          <hr>
+<!----  =======================================================================   -->
+<% if(currentUser.isInvested == true && new Date() >= currentUser.investedMatureDate) { %>
+  <form action="/matured/<%= currentUser._id%>" method="POST">
+  <input class="btn btn-success" type="submit" style="color: green; margin-left: 120px;" value="GET ROI">
+  </form>
+  <% }else { %>
+
+ <% } %>
+
+<!----  ======================================================================   -->
+
+
            <P></P> </span></a>
           </h2>
         
@@ -42,12 +66,12 @@
       <div  class="p-4 bg-dark">
         <span class="d-block text-secondary small text-uppercase"></span>
         <h2 style="color: blue;" class=""><p>Withdrawable Amount: </p> 
-          <p style="font-size: 30px;"> ₦ <%= currentUser.totalAmount %></p>
+          <p style="font-size: 30px;"> ₦ <%= currentUser.withdrawAmount %></p>
            <P></P> </span></a>
           </h2>
 
           <div>
-            <a href="#"><p style="margin-left: 100px;" class="btn btn-primary"> Withdraw</p>  </a>
+            <a href="/withdraw"><p style="margin-left: 100px;" class="btn btn-primary"> Withdraw</p>  </a>
           </div>
         
       </div>
