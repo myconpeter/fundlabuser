@@ -56,7 +56,7 @@ router.post('/newpassword', (req, res)=>{
              } else {
                  User.findOne({secret : secret}, (err, realUser)=>{
                     if(!realUser){
-                        req.flash('error_msg' , 'NOT ALLOWED!!!!');
+                        req.flash('error_msg' , 'WRONG INFORMATION');
                             res.redirect('/forgetpassword');
                     } else{
                         const idd = realUser.id;
@@ -66,7 +66,6 @@ router.post('/newpassword', (req, res)=>{
                                 if(err) throw err;
                                     //save pass to hash
                                     newpassword = hash;
-                                    console.log(newpassword)
                                     User.findByIdAndUpdate(idd, {password: newpassword },  function(err, data){
                                         if(err){
                                             console.log(err)
