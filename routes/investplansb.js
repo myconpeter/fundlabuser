@@ -12,7 +12,7 @@ router.post('/investnow5', ensureAuthenticated, (req, res)=>{
         req.flash('error_msg' , 'You current amount is too low for this package!!!!, Please fund your account');
         res.redirect('/myinvestment')
     }else{
-        User.findByIdAndUpdate(idd, {totalAmount : (totalamount - invset ), withdrawAmount : (totalamount - invset ), isInvested : true, currentInvestment: invset, investPlans : msg, investedDate: new Date(), investedMatureDate : new Date(+new Date() + 01*60*1000), investmentReturn :108500 }, (err, possible)=>{
+        User.findByIdAndUpdate(idd, { totalAmount: (totalamount - invset), withdrawAmount: (totalamount - invset), isInvested: true, currentInvestment: invset, investPlans: msg, investedDate: new Date(), investedMatureDate: new Date(+new Date() + 30 * 24 * 60 * 60 * 1000), investmentReturn: 108500 }, (err, possible) => {
            if(err){
                console.log(err)
            } else {
@@ -55,7 +55,7 @@ router.post('/investnow6', ensureAuthenticated, (req, res)=>{
         req.flash('error_msg' , 'You current amount is too low for this package!!!!, Please fund your account');
         res.redirect('/myinvestment')
     }else{
-        User.findByIdAndUpdate(idd, {totalAmount : (totalamount - invset ), withdrawAmount : (totalamount - invset ), isInvested : true, currentInvestment: invset, investPlans : msg, investedDate: new Date(), investedMatureDate : new Date(+new Date() + 01*60*1000), investmentReturn : 155000 }, (err, possible)=>{
+        User.findByIdAndUpdate(idd, { totalAmount: (totalamount - invset), withdrawAmount: (totalamount - invset), isInvested: true, currentInvestment: invset, investPlans: msg, investedDate: new Date(), investedMatureDate: new Date(+new Date() + 30 * 24 * 60 * 60 * 1000), investmentReturn: 155000 }, (err, possible) => {
            if(err){
                console.log(err)
            } else {

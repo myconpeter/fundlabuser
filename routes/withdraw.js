@@ -77,7 +77,7 @@ router.post('/withdraw',ensureAuthenticated, (req,res)=>{
                 if (err){
                     console.log(err)
                 }else{
-                    req.flash('success_msg','You have successfilly placed a withdrawal');
+                    req.flash('success_msg','You have Successfilly Placed a withdrawal');
                     res.redirect('/myinvestment');
                 }
             })
