@@ -25,7 +25,7 @@ const methodOverride = require("method-override");
 const flash = require("connect-flash");
 
 
-const PORT  = process.env.PORT || 8000;
+const PORT  = process.env.PORT  || 8000;
 
 
 //passport config:
