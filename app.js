@@ -25,6 +25,8 @@ const resetPasswordRoute = require("./routes/resetpassword");
 const investedMatureRoute = require("./routes/investmature");
 
 
+
+
 // mongodb connection
 // mongoose.connect("mongodb+srv://flamingo:michealisaman@cluster0.hknyx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
 //   useNewUrlParser: true,
@@ -35,14 +37,22 @@ const investedMatureRoute = require("./routes/investmature");
 //  });
 
 // local connection
-mongoose.connect('mongodb://localhost/flamingo', {
-   useNewUrlParser: true,
-   useUnifiedTopology: true,
-  useFindAndModify: false,
-   useCreateIndex: true
- })
- .then(() => console.log('connected to db'))
-.catch((err)=> console.log(err)); 
+// mongoose.connect('mongodb://localhost/flamingo', {
+//    useNewUrlParser: true,
+//    useUnifiedTopology: true,
+//   useFindAndModify: false,
+//    useCreateIndex: true
+//  })
+//  .then(() => console.log('connected to db'))
+// .catch((err)=> console.log(err)); 
+
+
+
+
+mongoose.connect('mongodb+srv://flamingo:michealpeter@cluster0.pa829.mongodb.net/flamingo?retryWrites=true&w=majority', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 //EJS
 app.set('view engine','ejs');
