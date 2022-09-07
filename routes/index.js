@@ -14,7 +14,7 @@ router.get('/', (req, res)=>{
 
         {name: "Sarduis", amount: 100000, returns:"55%", period: "30 days"},
     ]
-    res.render('index.ejs', {investplans: invest, currentUser: req.user})
+    res.render('index', {investplans: invest, currentUser: req.user})
 });
 
 router.get('/tips', (req, res)=>{
