@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 // const bcrypt = require('bcrypt');
 
 const UserSchema  = new mongoose.Schema({
-  fullname :{
+
+fullname :{
       type  : String,
       required : true
   } ,
@@ -43,6 +44,11 @@ currentInvestment: {
      default: 0 
     },
 
+investmentReturn: { 
+    type: Number,
+        default: 0 
+    },
+
 withdrawAmount: { 
     type: Number,
      default: 0 
@@ -59,17 +65,49 @@ isInvested: {
     default : false
 },
 
+refCodeBonus: {
+    type :Boolean,
+    default : false
+},
 
+refCodeAmount: {
+    type :Number,
+    default : 0
+},
+
+isReffered: {
+    type :Boolean,
+    default : false
+},
+
+investPlans: {
+    type :String,
+},
+
+investedDate: {
+    type: Date,
+},
+
+investedMatureDate: {
+    type: Date,
+},
+
+isWithdrawable: {
+    type: Boolean,
+    default : false
+},
 
 date :{
     type : Date,
-    default : Date.now
+    default :Date.now()
 }
+
+
 });
 
 
 
 
-const User= mongoose.model('User',UserSchema);
+const User= mongoose.model('User' ,UserSchema);
 
 module.exports = User;
