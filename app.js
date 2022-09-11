@@ -37,22 +37,22 @@ const investedMatureRoute = require("./routes/investmature");
 //  });
 
 // local connection
-// mongoose.connect('mongodb://localhost/flamingo', {
-//    useNewUrlParser: true,
-//    useUnifiedTopology: true,
-//   useFindAndModify: false,
-//    useCreateIndex: true
-//  })
-//  .then(() => console.log('connected to db'))
-// .catch((err)=> console.log(err)); 
+mongoose.connect('mongodb://localhost/fundLab', {
+   useNewUrlParser: true,
+   useUnifiedTopology: true,
+  useFindAndModify: false,
+   useCreateIndex: true
+ })
+ .then(() => console.log('connected to db'))
+.catch((err)=> console.log(err)); 
 
 
 
 
-mongoose.connect('mongodb+srv://flamingo:michealpeter@cluster0.pa829.mongodb.net/flamingo?retryWrites=true&w=majority', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// mongoose.connect('mongodb+srv://flamingo:michealpeter@cluster0.pa829.mongodb.net/flamingo?retryWrites=true&w=majority', {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
 
 //EJS
 app.set('view engine','ejs');
@@ -100,5 +100,5 @@ app.use(investPlanscRoutes);
 
 
 app.listen(PORT, ()=> {
-    console.log("Flamingo is now running");
+    console.log("FundLab is now running on 8000");
 });

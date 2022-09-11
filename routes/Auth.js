@@ -50,11 +50,11 @@ router.post('/signup',(req,res)=>{
                 telephone : telephone,
             })
              } else {
-                 User.findOne({telephone : refcode}).exec((err, ref)=>{
-                    if(!ref) {
-                        errors.push({msg: 'Referral code is invalid'});
-                        res.render('signup',{errors,fullname,username,email,password,password2,refcode,secret,telephone}) 
-                       }  else {
+                //  User.findOne({telephone : refcode}).exec((err, ref)=>{
+                //     if(!ref) {
+                //         errors.push({msg: 'Referral code is invalid'});
+                //         res.render('signup',{errors,fullname,username,email,password,password2,refcode,secret,telephone}) 
+                //        }  else {
         
                         User.findOne({email : email}).exec((err, user)=>{
                             if(user) {
@@ -107,8 +107,8 @@ router.post('/signup',(req,res)=>{
                            })
                       }
                 })
-               }
-            })
+            //    }
+            // })
 router.get('/logout',(req,res)=>{
     req.logout();
     req.flash('success_msg','You have successful logout');

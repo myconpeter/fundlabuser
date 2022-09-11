@@ -17,20 +17,27 @@ router.get('/', (req, res)=>{
     res.render('index', {investplans: invest, currentUser: req.user})
 });
 
-router.get('/tips', (req, res)=>{
-    res.render('tips')
+router.get('/legal', (req, res)=>{
+    res.render('legal')
 });
 
-router.get('/contact', (req, res)=>{
-    res.render('contact')
-});
 
-router.get('/vendor', (req, res)=>{
-    res.render('vendor')
+
+router.get('/affliate', (req, res)=>{
+    res.render('Affliate')
 });
 
 router.get('/about', (req, res)=>{
     res.render('about')
 });
+
+router.get('/trading', (req, res)=>{
+    res.render('trading')
+});
+
+router.get('/investment', (req, res)=>{
+    res.render('investmentHomePage')
+});
+
 
 module.exports = router;
