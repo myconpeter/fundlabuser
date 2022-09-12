@@ -2,19 +2,12 @@ const express = require("express");
 const router = express.Router();
 const passport = require ("passport");
 const User = require("../models/user")
+const {ensureAuthenticated} = require('../config/auth');
+
 
 router.get('/', (req, res)=>{
-    const invest = [
-        {name: "Jasper", amount: 5000, returns:"55%", period: "30 days"},
-        {name: "Sapphire", amount: 10000, returns:"55%", period: "30 days"},
-
-        {name: "Chalcedony", amount: 20000, returns:"55%", period: "30 days"},
-        {name: "Emerald", amount: 50000, returns:"55%", period: "30 days"},
-        {name: "Sardonxy", amount: 70000, returns:"55%", period: "30 days"},
-
-        {name: "Sarduis", amount: 100000, returns:"55%", period: "30 days"},
-    ]
-    res.render('index', {investplans: invest, currentUser: req.user})
+    
+    res.render('index', {currentUser: req.user})
 });
 
 router.get('/legal', (req, res)=>{
@@ -27,6 +20,10 @@ router.get('/affliate', (req, res)=>{
     res.render('Affliate')
 });
 
+
+
+
+
 router.get('/about', (req, res)=>{
     res.render('about')
 });
@@ -38,6 +35,38 @@ router.get('/trading', (req, res)=>{
 router.get('/investment', (req, res)=>{
     res.render('investmentHomePage')
 });
+
+router.get('/myinvestment', ensureAuthenticated, (req, res)=>{
+    res.render('myinvest')
+});
+
+router.get('/deposithistory', ensureAuthenticated, (req, res)=>{
+    res.render('DepositHistory')
+});
+
+router.get('/depositePlan', ensureAuthenticated, (req, res)=>{
+    res.render('depositPlan')
+});
+
+router.get('/withdrawForm', ensureAuthenticated, (req, res)=>{
+    res.render('withdrawForm')
+});
+
+router.get('/withdrawalHistory', ensureAuthenticated, (req, res)=>{
+    res.render('withhostory')
+});
+
+router.get('/referral', ensureAuthenticated, (req, res)=>{
+    res.render('referral')
+});
+
+router.get('/pamentdetails', ensureAuthenticated, (req, res)=>{
+    res.render('payment')
+});
+
+
+
+
 
 
 module.exports = router;

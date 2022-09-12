@@ -1246,6 +1246,11 @@
     transition: all 0.3s;
     border-top: 1px solid #cddfff;
   }
+  #plans{
+    border-style: solid;
+    border-color: blue;
+    border-radius: 30px;
+  }
   
   .footer .copyright {
     text-align: center;
