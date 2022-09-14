@@ -1,6 +1,8 @@
 <%- include("./partials/loginhead"); %>
 
+
     <form action="/signup" method="POST" >
+
 	
 	<div class="limiter">
 		<div class="container-login100">
@@ -8,16 +10,29 @@
 				<form class="login100-form validate-form">
 					<span class="login100-form-title p-b-33">
 						<a  href="/" class="btn btn-danger">Back</a>
+						<h2>Fund Lab Capital</h2>
+
 
 						Registration
 					</span>
 					<%- include ('./partials/messages') %>
-					 <div class="wrap-input100 validate-input" data-validate = "Valid Full name is required">
+					 <div class="wrap-input100 validate-input" data-validate = "Valid Firstname is required">
 						<input class="input100"
-						 type="fullname" 
-						name="fullname" 
-						placeholder="Full name"
-						 value="<%= typeof fullname != 'undefined' ? fullname : '' %>"
+						 type="firstname" 
+						name="firstname" 
+						placeholder="Firstname"
+						 value="<%= typeof firstname != 'undefined' ? firstname : '' %>"
+						 >
+						<span class="focus-input100-1"></span>
+						<span class="focus-input100-2"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Valid Lastname is required">
+						<input class="input100"
+						 type="lastname" 
+						name="lastname" 
+						placeholder="Lastname"
+						 value="<%= typeof lastname != 'undefined' ? lastname : '' %>"
 						 >
 						<span class="focus-input100-1"></span>
 						<span class="focus-input100-2"></span>
@@ -67,32 +82,6 @@
 						<span class="focus-input100-2"></span>
 					</div> 
 
-					 <div class="wrap-input100 rs1">
-						<input class="input100" 
-						type="refcode" 
-						name="refcode" 
-						placeholder="Referral code"
-						value="<%= typeof refcode != 'undefined' ? refcode : '' %>"
-						>
-						<span class="focus-input100-1"></span>
-						<span class="focus-input100-2"></span>
-					</div>
-
-					<div  class="wrap-input100 rs1 validate-input" data-validate="Secret Question is required">
-
-						<input class="input100"
-						 type="secret" 
-						 name="secret" 
-						 placeholder="Secret word   &mdash; &ldquo; Please do not share with anyone  &rdquo;"
-						 value="<%= typeof secret != 'undefined' ? secret : '' %>"
-						 >
-					  
-						<span class="focus-input100-1"></span>
-						<span class="focus-input100-2"></span>
-					</div>
-
-					
-
 					 <div class="wrap-input100 rs1 validate-input" data-validate="Phone Number is required">
 						<input class="input100"
 						 type="telephone" 
@@ -104,29 +93,7 @@
 						<span class="focus-input100-2"></span>
 					</div>
 					
-					<div>
-						<input type="hidden" name="totalAmount">
-					</div>
-
-					<div>
-					<input type="hidden" name="currentInvestment">
-					</div>
-
-					<div>
-						<input type="hidden" name="withdrawAmount">
-					</div>
-
-					<div>
-						<input type="hidden" name="recievedAmount">
-					</div>
-
-
-
-					
-
-					 
-
-
+				
 					<div>
 						<input class="" type="checkbox" name="check" required>
 						<p>By Clicking you agree with our <a href="/about">Terms & Condition</a></p>

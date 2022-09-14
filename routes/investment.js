@@ -15,15 +15,20 @@ router.get('/investnow', ensureAuthenticated, (req, res)=>{
 
 router.get('/myinvestment', ensureAuthenticated, (req, res)=>{
          const recieve = req.user.recievedAmount;
-         const amount = req.user.totalAmount;
-         const refcodebonus = req.user.refCodeAmount;
-         const allcash = recieve + amount + refcodebonus ;
+         const affliateBonus = req.user.affliateBonus;
+         const profit = req.user.profit;
+         const priciple = req.user.principle;
+         const amount = req.user.availableBalance;
+
+
+         const allcash = recieve + affliateBonus + profit + priciple + amount  ;
          const idd = req.user.id;
-         User.findByIdAndUpdate(idd, {totalAmount: allcash }, (err, money)=>{
+         User.findByIdAndUpdate(idd, {availableBalance: allcash }, (err, money)=>{
              if(err){
                  console.log(err)
              }
      })
+    //  User.save();
      User.findByIdAndUpdate(idd, {recievedAmount : 0, refCodeAmount : 0, refCodeBonus : false}, function(err, data){
       })
       res.render('myinvest')

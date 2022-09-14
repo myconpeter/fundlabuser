@@ -21,9 +21,9 @@ router.get('/signup', (req, res)=>{
         })
                 
 router.post('/signup',(req,res)=>{
-            const {fullname, username, email, password, password2, refcode, secret, telephone} = req.body;
+            const {firstname, lastname, username, email, password, password2, telephone} = req.body;
             let errors = [];
-            if(!fullname || !username || !email || !password || !password2 || !secret || !telephone) {
+            if(!firstname || !lastname || !username || !email || !password || !password2 || !telephone) {
                 errors.push({msg : "Please fill in all fields"})
             }
             //check if match
@@ -31,7 +31,7 @@ router.post('/signup',(req,res)=>{
                 errors.push({msg : "Passwords dont match"});
             }
             
-            //check if password is more than 6 characters
+            //check if password is less than 6 characters
             if(password.length < 6 ) {
                 errors.push({msg : 'Password must be at least 6 characters'})
             }
@@ -39,14 +39,13 @@ router.post('/signup',(req,res)=>{
             if(errors.length > 0 ) {
             res.render('signup', {
                 errors : errors,
-                fullname : fullname,
+                firstname : firstname,
+                lastname : lastname,
                 username : username,
                 email : email,
         
                 password : password,
                 password2 : password2,
-                refcode : refcode,
-                secret : secret,
                 telephone : telephone,
             })
              } else {
@@ -59,26 +58,25 @@ router.post('/signup',(req,res)=>{
                         User.findOne({email : email}).exec((err, user)=>{
                             if(user) {
                                 errors.push({msg: 'Email already registered, Please choose another'});
-                                res.render('signup',{errors,fullname,username,email,password,password2,refcode,secret,telephone})  
+                                res.render('signup',{errors,firstname,lastname,username,email,password,password2,telephone})  
                                } else{
                                 User.findOne({telephone : telephone}).exec((err, phone)=>{
                                         if (phone) {
                                             errors.push({msg: 'Phone number already registered, Please choose another'});
-                                            res.render('signup',{errors,fullname,username,email,password,password2,refcode,secret,telephone})  
+                                            res.render('signup',{errors,firstname,lastname,username,email,password,password2,telephone})  
                                          } else {
-                                             User.findOne({secret : secret}).exec((err, aSecret)=>{
+                                             User.findOne({username : username}).exec((err, aSecret)=>{
                                                  if (aSecret){
-                                                    errors.push({msg: 'Please Input another secret'});
-                                                    res.render('signup',{errors,fullname,username,email,password,password2,refcode,secret,telephone})          
+                                                    errors.push({msg: 'Please Input another username'});
+                                                    res.render('signup',{errors,firstname,lastname,username,email,password,password2,telephone})          
                                                  }  else {
                                                     const newUser = new User({
-                                                        fullname : fullname,
+                                                        firstname : firstname,
+                                                        lastname : lastname,
                                                         username : username,
                                         
                                                         email : email,
                                                         password : password,
-                                                        refcode : refcode,
-                                                        secret : secret,
                                                         telephone : telephone
                                                     });
                                             

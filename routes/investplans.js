@@ -10,7 +10,7 @@ router.post('/investnow1', ensureAuthenticated, (req, res)=>{
     const msg = "Jasper Package, ROI : 7,750 ";
     const idd = req.user.id;
     if (totalamount < invset){
-        req.flash('error_msg' , 'You current amount is too low for this package!!!!, Please fund your account');
+        req.flash('error_msg' , 'You current amount is too low for this plan!!!!, Please fund your account');
         res.redirect('/myinvestment')
     }else{
         User.findByIdAndUpdate(idd, { totalAmount: (totalamount - invset), withdrawAmount: (totalamount - invset), isInvested: true, currentInvestment: invset, investPlans: msg, investedDate: new Date(), investedMatureDate: new Date(+new Date() + 30 * 24 * 60 * 60 * 1000), investmentReturn: 7750 }, (err, possible) => {

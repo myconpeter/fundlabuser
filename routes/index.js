@@ -36,9 +36,9 @@ router.get('/investment', (req, res)=>{
     res.render('investmentHomePage')
 });
 
-router.get('/myinvestment', ensureAuthenticated, (req, res)=>{
-    res.render('myinvest')
-});
+// router.get('/myinvestment', ensureAuthenticated, (req, res)=>{
+//     res.render('myinvest')
+// });
 
 router.get('/deposithistory', ensureAuthenticated, (req, res)=>{
     res.render('DepositHistory')

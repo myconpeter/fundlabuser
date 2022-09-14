@@ -3,10 +3,14 @@ const mongoose = require('mongoose');
 
 const UserSchema  = new mongoose.Schema({
 
-fullname :{
+firstname :{
       type  : String,
       required : true
   } ,
+  lastname :{
+    type  : String,
+    required : true
+} ,
   username :{
     type  : String,
     required : true
@@ -20,24 +24,35 @@ password :{
     required : true
 } ,
 
-refcode :{
-    type  : String,
-} ,
-
-secret :{
-    type  : String,
-    required : true
-} ,
-
 telephone :{
     type  : Number,
     required : true
 } ,
 
-totalAmount: {
+recievedAmount : {
+    type: Number, 
+    default: 0
+    },
+
+availableBalance: {
      type: Number, 
      default: 0
      },
+
+profit: {
+        type: Number, 
+        default: 0
+        },
+
+affliateBonus: {
+            type: Number, 
+            default: 0
+            },
+
+principle: {
+         type: Number, 
+         default: 0
+         },
 
 currentInvestment: { 
     type: Number,
