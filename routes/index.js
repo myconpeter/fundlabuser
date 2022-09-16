@@ -36,9 +36,7 @@ router.get('/investment', (req, res)=>{
     res.render('investmentHomePage')
 });
 
-// router.get('/myinvestment', ensureAuthenticated, (req, res)=>{
-//     res.render('myinvest')
-// });
+
 
 router.get('/deposithistory', ensureAuthenticated, (req, res)=>{
     res.render('DepositHistory')
@@ -62,6 +60,10 @@ router.get('/referral', ensureAuthenticated, (req, res)=>{
 
 router.get('/pamentdetails', ensureAuthenticated, (req, res)=>{
     res.render('payment')
+});
+
+router.get('/contact', (req, res)=>{
+    res.render('contact')
 });
 
 

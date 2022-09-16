@@ -17,12 +17,9 @@ require('./config/passport')
 const indexRoutes = require("./routes/index");
 const authRoutes = require("./routes/Auth");
 const investmentRoutes = require("./routes/investment");
-const investPlansRoutes = require("./routes/investplans");
-const investPlansbRoutes = require("./routes/investplansb");
-const investPlanscRoutes = require("./routes/investplansc");
+
 const withdrawalRoutes = require("./routes/withdraw");
 const resetPasswordRoute = require("./routes/resetpassword");
-const investedMatureRoute = require("./routes/investmature");
 
 
 
@@ -88,12 +85,8 @@ app.use((req, res, next) => {
 app.use(indexRoutes);
 app.use(authRoutes);
 app.use(investmentRoutes);
-app.use(investPlansRoutes);
 app.use(withdrawalRoutes);
 app.use(resetPasswordRoute);
-app.use(investedMatureRoute);
-app.use(investPlansbRoutes);
-app.use(investPlanscRoutes);
 
 
 

@@ -7,7 +7,7 @@ firstname :{
       type  : String,
       required : true
   } ,
-  lastname :{
+lastname :{
     type  : String,
     required : true
 } ,
@@ -54,20 +54,6 @@ principle: {
          default: 0
          },
 
-currentInvestment: { 
-    type: Number,
-     default: 0 
-    },
-
-investmentReturn: { 
-    type: Number,
-        default: 0 
-    },
-
-withdrawAmount: { 
-    type: Number,
-     default: 0 
-    },
 
 
 recievedAmount: { 
@@ -75,25 +61,12 @@ recievedAmount: {
          default: 0 
         },
     
-isInvested: {
-    type :Boolean,
-    default : false
-},
-
-refCodeBonus: {
-    type :Boolean,
-    default : false
-},
 
 refCodeAmount: {
     type :Number,
     default : 0
 },
 
-isReffered: {
-    type :Boolean,
-    default : false
-},
 
 investPlans: {
     type :String,
@@ -103,14 +76,7 @@ investedDate: {
     type: Date,
 },
 
-investedMatureDate: {
-    type: Date,
-},
 
-isWithdrawable: {
-    type: Boolean,
-    default : false
-},
 
 date :{
     type : Date,
