@@ -1,4 +1,6 @@
 <%- include("./partials/investhead"); %>
+<%- include("./partials/messages"); %>
+
 
   <main id="main" class="main">
 
@@ -35,13 +37,11 @@
                   
                   <h6>No Ongoing Investment</h6>
                   <div class="col-sm-10">
-                    <a href="/depositePlan"><button type="submit" class="btn btn-primary">Invest Now</button></a>
 
                   </div>
                 </div>
                   <h6 style="font-size: 30px; text-align: center;"><%= currentUser.investPlans %></h6>
             <h1 id="demo" style="text-align: center; color:blue;"></h1>
-            <p style="color:rgb(75, 75, 240);"><span>Investment Maturity Date :</span>  <em><%= currentUser.investedMatureDate %></em> </p>
 
 
                 </div>
@@ -243,7 +243,7 @@
       
               <div class="news">
                 <div class="post-item clearfix">
-                  <img src="https://i.ibb.co/bRYXGCd/photo-2022-09-09-09-50-52.jpg" alt="">
+                  <img src="images/fund1.jpg" alt="Image" class="img-fluid">
                   <h4><a href="/">Fund Lab Capital</a></h4>
                   <p>Fund Lab Capital is the cryptocurrency & forex trading firm, concentrated in producing favourable financing solutions.</p>
                 </div>

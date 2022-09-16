@@ -5,11 +5,12 @@ const {ensureAuthenticated} = require('../config/auth');
 
 
 router.post('/investnow1', ensureAuthenticated, (req, res)=>{
-    const totalamount = req.user.totalAmount
-    const invset = 5000;
-    const msg = "Jasper Package, ROI : 7,750 ";
+    const totalamount = req.user.availableBalance
+    const high = 9999;
+    const low = 100;
+    const msg = "Basic Plan, ROI : 7% ";
     const idd = req.user.id;
-    if (totalamount < invset){
+    if (totalamount < low){
         req.flash('error_msg' , 'You current amount is too low for this plan!!!!, Please fund your account');
         res.redirect('/myinvestment')
     }else{
