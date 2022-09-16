@@ -2,7 +2,6 @@
 
 
   <main id="main" class="main">
-    <i class="bi bi-5-square"></i>
 
     <div class="pagetitle">
       <h1>Dashboard</h1>
@@ -21,20 +20,27 @@
             <div class="card-header">
             </div>
             <div class="card-body">
-<div id="smartwizard" class="form-wizard order-create">
+<div id="" class="form-wizard order-create">
   <form class="form" action="withdraw" method="post">
       <div class="row">
 <div class="col-lg-12 mb-2">
         <div class="col-lg-6 mb-2">
           <div class="form-group">
                          <label class="control-label">Amount</label>
-                      <input type="text" id="eventInput1" class="form-control" required="" placeholder="Amount" name="amount">
+                      <input 
+                      type="text" 
+                      value="<%= typeof acctnum != 'undefined' ? acctnum : '' %>" 
+                      type="text" id="eventInput1" class="form-control" 
+                      required="" placeholder="Amount" name="amount">
           </div>
         </div>
+       
         <div class="col-lg-6 mb-2">
           <div class="form-group">
              <label class="control-label">Payment Wallet</label>
-                                       <input type="text" id="eventInput3" class="form-control" required="" placeholder="Payment Wallet" name="method"> 
+                         <input 
+                         type="text" id="eventInput3" class="form-control" 
+                         required="" placeholder="Payment Wallet" name="method"> 
           </div>
         </div>
   <div class="col-lg-12 mb-2">
@@ -44,9 +50,10 @@
 <option>Bitcoin</option>
                      <option>litecoin</option>
                      <option>Ethereum</option>
-                       <option>Prefect Money</option>
+                       <option>Tron</option>
                          <option>Usdt</option>
                          <option>Bep20</option>
+                         <option>Litecoin</option>
                     </select>
           </div>
         </div>        

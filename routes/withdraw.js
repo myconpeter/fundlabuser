@@ -5,29 +5,13 @@ const Withdrawal = require('../models/Withdrawal');
 const {ensureAuthenticated} = require('../config/auth');
 
 router.get('/withdraw', ensureAuthenticated, (req, res)=>{
-const total = req.user.totalAmount;
-const investment = req.user.isInvested;
-const Withdrawable = req.user.isWithdrawable
 
-if(investment == true){
-    req.flash('error_msg' , 'You have an active investment, Please wait for Completion of your package, Thanks');
-        res.redirect('/myinvestment');
-    } 
 
-    else if (Withdrawable == false){
-        req.flash('error_msg' , 'You cannot withdraw this amount, please review our faqs for more explanation');
-        res.redirect('/myinvestment');
-    }
- 
-    else if (total < 1000){
-        req.flash('error_msg' , 'You cannot withdraw this amount, Please fund your account');
-        res.redirect('/myinvestment');
-    }else{
-        res.render('withdrawal') 
+
+
+res.render('withdrawal') 
     
-    }
- 
-})
+    })
     
 router.post('/withdraw',ensureAuthenticated, (req,res)=>{
             const {email, acctname, acctnum, bankname, telephone, secret} = req.body;
