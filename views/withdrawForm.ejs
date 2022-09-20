@@ -12,6 +12,8 @@
         </ol>
       </nav>
     </div><!-- End Page Title -->
+    <%- include ('./partials/messages') %>
+
 
 <div>
   <div class="row">
@@ -21,7 +23,7 @@
             </div>
             <div class="card-body">
 <div id="" class="form-wizard order-create">
-  <form class="form" action="withdraw" method="post">
+  <form action="/withdraw" method="post" class="form" >
       <div class="row">
 <div class="col-lg-12 mb-2">
         <div class="col-lg-6 mb-2">
@@ -40,7 +42,7 @@
              <label class="control-label">Payment Wallet</label>
                          <input 
                          type="text" id="eventInput2" class="form-control" 
-                         required="" placeholder="Payment Wallet" name="method"> 
+                         required="" placeholder="Payment Wallet" name="wallet"> 
           </div>
         </div>
   <div class="col-lg-12 mb-2">
@@ -69,7 +71,8 @@
     
 
 </div>
- </div></form>
+ </div>
+</form>
   </div>
 </div>
             </div>

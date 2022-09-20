@@ -2,39 +2,20 @@ const mongoose = require('mongoose');
 // const bcrypt = require('bcrypt');
 
 const WithdrawalSchema  = new mongoose.Schema({
-email :{
+    amount :{
         type  : String,
         required : true
     } ,
 
-acctname :{
+    wallet :{
       type  : String,
       required : true
   } ,
-  acctnum :{
+  payment_method :{
     type  : String,
     required : true
 } ,
-bankname :{
-    type  : String,
-    required : true
-} ,
-telephone :{
-    type  : Number,
-    required : true
-} ,
-
-secret :{
-    type  : String,
-    required : true
-
-} ,
-
-amount: {
-     type: Number, 
-     default: 0
-     },
-     
+   
 date :{
         type : Date,
         default : new Date()

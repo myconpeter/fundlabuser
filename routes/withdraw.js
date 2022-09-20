@@ -4,60 +4,47 @@ const User = require("../models/user");
 const Withdrawal = require('../models/Withdrawal');
 const {ensureAuthenticated} = require('../config/auth');
 
-router.get('/withdraw', ensureAuthenticated, (req, res)=>{
+// router.get('/withdraw', ensureAuthenticated, (req, res)=>{
+//     const bal = req.user.availableBalance
+
+// if(bal <= 0){
+//     req.flash('error_msg' , 'Your current balance is too low, Please make deposit using the depodit link, Thanks');
+
+// }
 
 
-
-
-res.render('withdrawal') 
+// res.render('withdrawForm') 
     
-    })
+//     })
     
 router.post('/withdraw',ensureAuthenticated, (req,res)=>{
-            const {email, acctname, acctnum, bankname, telephone, secret} = req.body;
+            const {amount, wallet, payment_method} = req.body;
             let errors = [];
-            if(!acctname || !email || !acctnum || !bankname || !telephone || !secret ) {
+            if(!amount || !wallet || !payment_method  ) {
                 errors.push({msg : "Please fill in all fields"})
             }
           if(errors.length > 0 ) {
-            res.render('withdrawal', {
+            res.render('withdrawForm', {
                 errors : errors,
-                acctname : acctname,
-                acctnum : acctnum,
-                bankname : bankname,
-        
-                telephone : telephone,
-                secret : secret,
+                amount : amount,
+                wallet : wallet,
+                payment_method : payment_method,
+                
             })
-             } else {
-                User.findOne({email: email}, (err, withdraw)=>{
-                    if (err){
-                        console.log(err)
-                    } else{
- //validation passed
- User.findOne({secret : secret}).exec((err, realuser)=>{
-    if(!realuser) {
-        errors.push({msg: 'Please enter your users secret'});
-        res.render('withdrawal',{errors,acctname,acctnum,bankname,telephone,secret})  
-       } else {
-           const mmm = req.user.totalAmount
+             } 
         const newWithdrawal = new Withdrawal({
-            email   : email,
-            acctname : acctname,
-            acctnum : acctnum,
-            bankname : bankname,
-            telephone : telephone,
-            secret : secret, 
-            amount : mmm, 
+            amount : amount,            
+            wallet : wallet,            
+            payment_method : payment_method,
             user : req.user,  
         });
 
         newWithdrawal.save()
         .then((value)=>{
-            const totalAmount = req.user.totalAmount;
+            const totalAmount = req.user.availableBalance;
             const idd = req.user.id;
             const reset = 0;
-            User.findByIdAndUpdate(idd, {totalAmount : reset, isWithdrawable : false, withdrawAmount : 0}, function(err, data){
+            User.findByIdAndUpdate(idd, {totalAmount : reset }, function(err, data){
                 if (err){
                     console.log(err)
                 }else{
@@ -68,10 +55,7 @@ router.post('/withdraw',ensureAuthenticated, (req,res)=>{
         })
         .catch(value=> console.log(value));                
          }
-   })
-                    }
-                })
-            }
-            })
+   )
+             
 
 module.exports = router; 

@@ -56,8 +56,8 @@ After making your payment to the address, click on the button below and your dep
           <div class="input-group">
 <input class="form-control" value="bc1q5c7hv400fsfkklt0yr8mjflflg6tq0v2ryh473" id="myInput1" readonly="" type="text">
             <span class="input-group-append">
-<button class="btn btn-primary" type="button" id="show" onclick="myFunction1()">Copy</button>
-<!-- <button class="btn btn-success" id="hide" type="button">Copied</button> -->
+<button class="btn btn-primary" type="button" id="show1" onclick="myFunction1()">Copy</button>
+<button style="display: none;" class="btn btn-success" id="hide1" type="button">Copied</button>
 
 
 
@@ -71,7 +71,7 @@ After making your payment to the address, click on the button below and your dep
             <span class="input-group-append">
 
 <button class="btn btn-primary" type="button" id="show2" onclick="myFunction2()">Copy</button>
-<!-- <button class="btn btn-success" id="hide2" type="button">Copied</button> -->
+<button style="display: none;" class="btn btn-success" id="hide2" type="button">Copied</button>
   </span>
           </div>
         </div>
@@ -82,7 +82,7 @@ After making your payment to the address, click on the button below and your dep
             <span class="input-group-append">
 
 <button class="btn btn-primary" type="button" id="show3" onclick="myFunction3()">Copy</button>
-<!-- <button class="btn btn-success" id="hide3" type="button">Copied</button> -->
+<button style="display: none;" class="btn btn-success" id="hide3" type="button">Copied</button>
 
   </span>
           </div>
@@ -94,8 +94,8 @@ After making your payment to the address, click on the button below and your dep
 <input class="form-control" value=" D8RYkzEpLHyFMpiZQKe7pSYeXoNAu8Wxo4" id="myInput4" readonly="" type="text">
             <span class="input-group-append">
 
-<button class="btn btn-primary" type="button" id="" onclick="myFunction4()">Copy</button>
-<!-- <button class="btn btn-primary" id="hide5" type="button">Copied</button> -->
+<button class="btn btn-primary" type="button" id="show4" onclick="myFunction4()">Copy</button>
+<button style="display: none;" class="btn btn-success" id="hide4" type="button">Copied</button>
   </span>
           </div>
         </div>
@@ -105,8 +105,8 @@ After making your payment to the address, click on the button below and your dep
 <input class="form-control" value=" TN19rXMYPcTFW9JKJojyzhSbaDy5fdsGCe" id="myInput5" readonly="" type="text">
             <span class="input-group-append">
 
-              <button class="btn btn-primary" type="button" id="show" onclick="myFunction5()">Copy</button>
-              <!-- <button class="btn btn-success" id="hide6" type="button">Copied</button> -->
+              <button class="btn btn-primary" type="button" id="show5" onclick="myFunction5()">Copy</button>
+              <button style="display: none;" class="btn btn-success" id="hide5" type="button">Copied</button>
 
   </span>
           </div>
@@ -124,8 +124,8 @@ After making your payment to the address, click on the button below and your dep
 <input class="form-control" value=" TN19rXMYPcTFW9JKJojyzhSbaDy5fdsGCe" id="myInput6" readonly="" type="text">
             <span class="input-group-append">
 
-<button class="btn btn-primary" type="button" id="show" onclick="myFunction6()">Copy</button>
-<!-- <button class="btn btn-success" id="hide" type="button">Copied</button> -->
+<button class="btn btn-primary" type="button" id="show6" onclick="myFunction6()">Copy</button>
+<button style="display: none;" class="btn btn-success" id="hide6" type="button">Copied</button>
 
   </span>
           </div>
@@ -190,77 +190,75 @@ After making your payment to the address, click on the button below and your dep
 <script src="js/mains.js"></script>
 <script src="https://kit.fontawesome.com/f3fe227b35.js" crossorigin="anonymous"></script>
 <script>
-  function myFunction1() {
-      // Get the text field
-      var copyText = document.getElementById("myInput1");
-    
-      // Select the text field
-      copyText.select();
-      copyText.setSelectionRange(0, 99999); // For mobile devices
-    
-       // Copy the text inside the text field
-      navigator.clipboard.writeText(copyText.value);
+  
+function myFunction1() {
+  var copyText = document.getElementById("myInput1");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999)
+  document.execCommand("copy");
+  
+  
+  document.getElementById("show1").style.display = "none"; 
+  document.getElementById("hide1").style.display = "block"; 
+}
 
-      var changebutton = document.getElementById("hide")
-      
-      
-    
-      // Alert the copied text
-      // alert("Copied the text: " + copyText.value);
-    }
+function myFunction2() {
+  var copyText = document.getElementById("myInput2");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999)
+  document.execCommand("copy");
+  
+  
+  document.getElementById("show2").style.display = "none"; 
+  document.getElementById("hide2").style.display = "block"; 
+}
 
-    function myFunction2() {
-      // Get the text field
-      var copyText = document.getElementById("myInput2");
-    
-      // Select the text field
-      copyText.select();
-      copyText.setSelectionRange(0, 99999); // For mobile devices
-    
-       // Copy the text inside the text field
-      navigator.clipboard.writeText(copyText.value);
+function myFunction3() {
+  var copyText = document.getElementById("myInput3");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999)
+  document.execCommand("copy");
+  
+  
+  document.getElementById("show3").style.display = "none"; 
+  document.getElementById("hide3").style.display = "block"; 
+}
+function myFunction4() {
+  var copyText = document.getElementById("myInput4");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999)
+  document.execCommand("copy");
+  
+  
+  document.getElementById("show4").style.display = "none"; 
+  document.getElementById("hide4").style.display = "block"; 
+}
+function myFunction5() {
+  var copyText = document.getElementById("myInput5");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999)
+  document.execCommand("copy");
+  
+  
+  document.getElementById("show5").style.display = "none"; 
+  document.getElementById("hide5").style.display = "block"; 
+}
 
-      // var changebutton = document.getElementById("hide")
-      
+function myFunction6() {
+  var copyText = document.getElementById("myInput6");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999)
+  document.execCommand("copy");
+  
+  
+  document.getElementById("show6").style.display = "none"; 
+  document.getElementById("hide6").style.display = "block"; 
+}
+
+
+
+
     
-      // Alert the copied text
-      // alert("Copied the text: " + copyText.value);
-    }
-    function myFunction3() {
-      // Get the text field
-      var copyText = document.getElementById("myInput3");
-      copyText.select();
-      copyText.setSelectionRange(0, 99999); // For mobile devices
-      navigator.clipboard.writeText(copyText.value);
-    }
-    function myFunction4() {
-      // Get the text field
-      var copyText = document.getElementById("myInput4");
-      copyText.select();
-      copyText.setSelectionRange(0, 99999); // For mobile devices
-      navigator.clipboard.writeText(copyText.value);
-    }
-    function myFunction5() {
-      // Get the text field
-      var copyText = document.getElementById("myInput5");
-      copyText.select();
-      copyText.setSelectionRange(0, 99999); // For mobile devices
-      navigator.clipboard.writeText(copyText.value);
-    }
-    function myFunction6() {
-      // Get the text field
-      var copyText = document.getElementById("myInput6");
-      copyText.select();
-      copyText.setSelectionRange(0, 99999); // For mobile devices
-      navigator.clipboard.writeText(copyText.value);
-    }
-    function myFunction7() {
-      // Get the text field
-      var copyText = document.getElementById("myInput7");
-      copyText.select();
-      copyText.setSelectionRange(0, 99999); // For mobile devices
-      navigator.clipboard.writeText(copyText.value);
-    }
 </script>
 
 

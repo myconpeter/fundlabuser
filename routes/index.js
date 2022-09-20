@@ -51,7 +51,7 @@ router.get('/withdrawForm', ensureAuthenticated, (req, res)=>{
 });
 
 router.get('/withdrawalHistory', ensureAuthenticated, (req, res)=>{
-    res.render('withhostory')
+    res.render('withhostory', {currentUser: req.user})
 });
 
 router.get('/referral', ensureAuthenticated, (req, res)=>{
