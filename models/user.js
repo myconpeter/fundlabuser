@@ -24,10 +24,7 @@ password :{
     required : true
 } ,
 
-telephone :{
-    type  : Number,
-    required : true
-} ,
+
 
 recievedAmount : {
     type: Number, 

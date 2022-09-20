@@ -21,9 +21,9 @@ router.get('/signup', (req, res)=>{
         })
                 
 router.post('/signup',(req,res)=>{
-            const {firstname, lastname, username, email, password, password2, telephone} = req.body;
+            const {firstname, lastname, username, email, password, password2} = req.body;
             let errors = [];
-            if(!firstname || !lastname || !username || !email || !password || !password2 || !telephone) {
+            if(!firstname || !lastname || !username || !email || !password || !password2) {
                 errors.push({msg : "Please fill in all fields"})
             }
             //check if match
@@ -46,7 +46,6 @@ router.post('/signup',(req,res)=>{
         
                 password : password,
                 password2 : password2,
-                telephone : telephone,
             })
              } else {
                 //  User.findOne({telephone : refcode}).exec((err, ref)=>{
@@ -58,12 +57,12 @@ router.post('/signup',(req,res)=>{
                         User.findOne({email : email}).exec((err, user)=>{
                             if(user) {
                                 errors.push({msg: 'Email already registered, Please choose another'});
-                                res.render('signup',{errors,firstname,lastname,username,email,password,password2,telephone})  
+                                res.render('signup',{errors,firstname,lastname,username,email,password,password2})  
                                } else{
-                                User.findOne({telephone : telephone}).exec((err, phone)=>{
+                                User.findOne({username : username}).exec((err, phone)=>{
                                         if (phone) {
-                                            errors.push({msg: 'Phone number already registered, Please choose another'});
-                                            res.render('signup',{errors,firstname,lastname,username,email,password,password2,telephone})  
+                                            errors.push({msg: 'Username chosen already registered, Please choose another'});
+                                            res.render('signup',{errors,firstname,lastname,username,email,password,password2})  
                                          } else {
                                              User.findOne({username : username}).exec((err, aSecret)=>{
                                                  if (aSecret){
@@ -77,7 +76,6 @@ router.post('/signup',(req,res)=>{
                                         
                                                         email : email,
                                                         password : password,
-                                                        telephone : telephone
                                                     });
                                             
                                         //hash password
