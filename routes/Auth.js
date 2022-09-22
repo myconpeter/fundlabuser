@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require ("passport");
 const bcrypt = require('bcrypt');
 const User = require("../models/user");
+const { request } = require("express");
 
 router.get("/login", (req, res)=>{
     res.render('login')
@@ -21,6 +22,30 @@ router.get('/signup', (req, res)=>{
         })
                 
 router.post('/signup',(req,res)=>{
+            if(
+                req.body.captcha === undefined || 
+                req.body.captcha === ''  ||
+                req.body.captcha === null
+            ){
+                errors.push({"success":false, msg : "Passwords dont match"});
+  
+            }
+                const secretKey = '6LehXx4iAAAAAFRk-EteuwCRphHRzi8eN4Vm9bdm';
+
+                const verifyUrl = `https://google.com/recaptcha/api/siteverify?secret=${secretKey}
+                &response=${req.body.captcha}&remoteip=${req.connection.remoteAddress}`;
+
+
+                request(verifyUrl, (err, response, body)=> {
+                    body = JSON.parse(body);
+
+                    if(body.success !== undefined && !body.success){
+                        return res.json({"success": false, "msg":"not successful"});
+                    }
+                    return res.json({"success": true, "msg":"successful"});
+
+                })
+
             const {firstname, lastname, username, email, password, password2} = req.body;
             let errors = [];
             if(!firstname || !lastname || !username || !email || !password || !password2) {
