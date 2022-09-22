@@ -30,7 +30,7 @@ router.post('/signup',(req,res)=>{
                 errors.push({"success":false, msg : "Passwords dont match"});
   
             }
-                const secretKey = '6LehXx4iAAAAAFRk-EteuwCRphHRzi8eN4Vm9bdm';
+                const secretKey = '6LdaYR4iAAAAADmDnO1TPgEA_OGrcfeKCQf6ONcC';
 
                 const verifyUrl = `https://google.com/recaptcha/api/siteverify?secret=${secretKey}
                 &response=${req.body.captcha}&remoteip=${req.connection.remoteAddress}`;
