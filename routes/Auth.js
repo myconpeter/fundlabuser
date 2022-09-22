@@ -3,7 +3,9 @@ const router = express.Router();
 const passport = require ("passport");
 const bcrypt = require('bcrypt');
 const User = require("../models/user");
-const { request } = require("express");
+const request = require("request");
+const { response } = require("express");
+
 
 router.get("/login", (req, res)=>{
     res.render('login')
@@ -21,33 +23,28 @@ router.get('/signup', (req, res)=>{
         res.render('signup')
         })
                 
-router.post('/signup',(req,res)=>{
-            if(
-                req.body.captcha === undefined || 
-                req.body.captcha === ''  ||
-                req.body.captcha === null
-            ){
-                errors.push({"success":false, msg : "Passwords dont match"});
-  
-            }
-                const secretKey = '6LdaYR4iAAAAADmDnO1TPgEA_OGrcfeKCQf6ONcC';
-
-                const verifyUrl = `https://google.com/recaptcha/api/siteverify?secret=${secretKey}
-                &response=${req.body.captcha}&remoteip=${req.connection.remoteAddress}`;
-
-
-                request(verifyUrl, (err, response, body)=> {
-                    body = JSON.parse(body);
-
-                    if(body.success !== undefined && !body.success){
-                        return res.json({"success": false, "msg":"not successful"});
-                    }
-                    return res.json({"success": true, "msg":"successful"});
-
-                })
-
+router.post('/signup',(req, res)=>{
+            
+    
             const {firstname, lastname, username, email, password, password2} = req.body;
             let errors = [];
+           
+                const secretKey = '6LdaYR4iAAAAADmDnO1TPgEA_OGrcfeKCQf6ONcC';
+        
+                const verifyUrl = `https://google.com/recaptcha/api/siteverify?secret=${secretKey}
+                &response=${req.body.captcha}&remoteip=${req.connection.remoteAddress}`;
+        
+        
+                request(verifyUrl, (err, response, body)=> {
+                    body = JSON.parse(body);
+        
+                    
+                    // return res.json({"success": true, "msg":"successful"});
+        
+                })
+        
+        
+
             if(!firstname || !lastname || !username || !email || !password || !password2) {
                 errors.push({msg : "Please fill in all fields"})
             }
@@ -127,6 +124,7 @@ router.post('/signup',(req,res)=>{
                                }
                            })
                       }
+                      
                 })
             //    }
             // })
