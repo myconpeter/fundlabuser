@@ -1,0 +1,91 @@
+<%- include("./partials/investhead"); %>
+
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Dashboard</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/investment">Home</a></li>
+          <li class="breadcrumb-item active">Payment Form</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+    <%- include ('./partials/messages') %>
+
+
+<div>
+  <div class="row">
+    <div class="col-xl-12 col-xxl-12">
+        <div class="card">
+            <div class="card-header">
+            </div>
+            <div class="card-body">
+<div id="" class="form-wizard order-create">
+  <form action="/paynow" method="post" class="form" >
+      <div class="row">
+<div class="col-lg-12 mb-2">
+        <div class="col-lg-6 mb-2">
+          <div class="form-group">
+                         <label class="control-label">Amount</label>
+                      <input 
+                      type="text" 
+                      value="<%= typeof acctnum != 'undefined' ? acctnum : '' %>" 
+                      type="text" id="eventInput1" class="form-control" 
+                      required="" placeholder="Amount" name="amount">
+          </div>
+        </div>
+       
+        
+  <div class="col-lg-12 mb-2">
+          <div class="form-group">
+                 <label class="control-label">Payment Method</label>
+                         <select class="form-control" id="payment_method" name="payment_method">
+<option>Bitcoin</option>
+                     <option>litecoin</option>
+                     <option>Ethereum</option>
+                       <option>Tron</option>
+                         <option>Usdt</option>
+                         <option>Doge</option>
+                         <option>Litecoin</option>
+                    </select>
+          </div>
+        </div>        
+<input type="hidden" class="form-control" required="" name="username_updates" id="exampleInputEmail" value="mycon" aria-describedby="emailHelp" placeholder="Payment Address">
+<input type="hidden" class="form-control" required="" name="email_updates" id="exampleInputEmail" value="myconpeter@gmail.com" aria-describedby="emailHelp" placeholder="Payment Address">
+<div class="col-lg-12 mb-3">
+          <div class="form-group">
+       <center>	    
+  <input type="submit" class="btn btn-primary" value="Pay Now" name="Pay Now">
+</center>
+          </div>
+          
+    
+
+</div>
+ </div>
+</form>
+  </div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Start of Tawk.to Script-->
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/63251bb737898912e969a864/default';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+  })();
+  </script>
+  <!--End of Tawk.to Script-->
+  <!--End of Tawk.to Script-->
+        <%- include("./partials/investfoot"); %>

@@ -53,25 +53,18 @@ principle: {
 
 
 
-recievedAmount: { 
-        type: Number,
-         default: 0 
-        },
+
     
 
-refCodeAmount: {
-    type :Number,
-    default : 0
-},
+
 
 
 investPlans: {
     type :String,
+    default :"No Active Investment"
 },
 
-investedDate: {
-    type: Date,
-},
+
 
 
 

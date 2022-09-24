@@ -49,8 +49,8 @@ const resetPasswordRoute = require("./routes/resetpassword");
 mongoose.connect('mongodb+srv://fund:micheal@cluster0.urmkbdt.mongodb.net/?retryWrites=true&w=majority', {
    useNewUrlParser: true,
    useUnifiedTopology: true,
-  // useFindAndModify: false,
-   // useCreateIndex: true
+  useFindAndModify: false,
+   useCreateIndex: true
  })
  .then(() => console.log('connected to online'))
 .catch((err)=> console.log(err)); 

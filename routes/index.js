@@ -65,6 +65,10 @@ router.get('/contact', (req, res)=>{
 });
 
 
+router.get('/paymentform', (req, res)=>{
+    res.render('paymentform')
+});
+
 
 
 
