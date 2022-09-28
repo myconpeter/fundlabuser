@@ -26,6 +26,16 @@
   <form action="/paynow" method="post" class="form" >
       <div class="row">
 <div class="col-lg-12 mb-2">
+  <div class="col-lg-6 mb-2">
+    <div class="form-group">
+                   <label class="control-label">Email</label>
+                <input 
+                type="text" 
+                value="<%= currentUser.email%>" 
+                type="text" id="eventInput1" class="form-control" 
+                required="" placeholder="email" name="email">
+    </div>
+  </div>
         <div class="col-lg-6 mb-2">
           <div class="form-group">
                          <label class="control-label">Amount</label>

@@ -20,14 +20,15 @@ const {ensureAuthenticated} = require('../config/auth');
 //     })
     
 router.post('/withdraw',ensureAuthenticated, (req,res)=>{
-            const {amount, wallet, payment_method} = req.body;
+            const {email, amount, wallet, payment_method} = req.body;
             let errors = [];
-            if(!amount || !wallet || !payment_method  ) {
+            if(!email, !amount || !wallet || !payment_method  ) {
                 errors.push({msg : "Please fill in all fields"})
             }
           if(errors.length > 0 ) {
             res.render('withdrawForm', {
                 errors : errors,
+                email : email,
                 amount : amount,
                 wallet : wallet,
                 payment_method : payment_method,
@@ -35,6 +36,7 @@ router.post('/withdraw',ensureAuthenticated, (req,res)=>{
             })
              } 
         const newWithdrawal = new Withdrawal({
+            email : email,
             amount : amount,            
             wallet : wallet,            
             payment_method : payment_method,
@@ -61,20 +63,22 @@ router.post('/withdraw',ensureAuthenticated, (req,res)=>{
              
 
    router.post('/paynow',ensureAuthenticated, (req,res)=>{
-    const {amount, payment_method} = req.body;
+    const {email, amount, payment_method} = req.body;
     let errors = [];
-    if(!amount || !payment_method  ) {
+    if(!email || !amount || !payment_method  ) {
         errors.push({msg : "Please fill in all fields"})
     }
   if(errors.length > 0 ) {
     res.render('paymentform', {
         errors : errors,
+        email  : email,
         amount : amount,
         payment_method : payment_method,
         
     })
      } 
 const newDeposit = new Deposit({
+    email : email,
     amount : amount,            
     payment_method : payment_method,
     user : req.user,  

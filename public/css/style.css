@@ -11,6 +11,35 @@ body {
     height: 60px;
     
   }
+.none{
+  padding: 0;
+}
+  #google_translate_element select{
+    background:#f6edfd;
+    color:#383ffa;
+    
+    box-sizing: border-box;
+width: 50%;
+border: solid #5B6DCD 10px;
+    
+    border-radius:3px;
+    padding:6px 8px;
+    padding: 0;
+
+    }
+    .goog-logo-link{
+      display:block!important;
+     }
+    .goog-te-gadget{
+    color:transparent!important;
+    } 
+    .goog-te-banner-frame{
+    display:block !important;
+    }
+    
+    #goog-gt-tt, .goog-te-balloon-frame{display: block !important;}
+   .goog-text-highlight { background: block !important; box-shadow: none !important;}
+
   .responsive{
     max-width: 100%;
     max-height: 100%;
