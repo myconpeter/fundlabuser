@@ -1,5 +1,5 @@
 <% if(typeof errors!= 'undefined') { %>
-<%    errors.forEach(function(error){ %>
+<%    errors.forEach((error) => { %>
         <p style="color: red; font-weight: bold; border: 1px solid whitesmoke; background-color: white;"> <%= error.msg %></p>
 <%    })        %>
 <% } %>

@@ -93,8 +93,20 @@ newDeposit.save()
         if (err){
             console.log(err)
         }else{
-            req.flash('success_msg','Please Pay to the below Address');
-            res.redirect('/pamentdetails');
+            const newuserDepo = new  userDepo({
+                status : status,
+                amount : amount,
+                payment_method : payment_method,
+                user : req.user,
+
+            });
+
+            newuserDepo.save()
+            .then((value)=>{
+                
+            })
+            // req.flash('success_msg','Please Pay to the below Address');
+            // res.redirect('/pamentdetails');
         }
     })
 })

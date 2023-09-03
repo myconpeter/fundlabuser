@@ -131,9 +131,9 @@ router.post('/signup',(req, res)=>{
 router.get('/logout',(req,res)=>{
     req.logout();
     req.flash('success_msg','You have successful logout');
-    res.redirect('/'); 
+    res.redirect('/');
     })
         
  module.exports = router;     
         
-        
+    

@@ -34,25 +34,25 @@ const resetPasswordRoute = require("./routes/resetpassword");
 //  });
 
 // local connection
-// mongoose.connect('mongodb://localhost/fundLab', {
-//    useNewUrlParser: true,
-//    useUnifiedTopology: true,
-//   useFindAndModify: false,
-//    useCreateIndex: true
-//  })
-//  .then(() => console.log('connected to db'))
-// .catch((err)=> console.log(err)); 
-
-
-// online  connection
-mongoose.connect('mongodb+srv://fund:micheal@cluster0.urmkbdt.mongodb.net/?retryWrites=true&w=majority', {
+mongoose.connect('mongodb://localhost/fundLab', {
    useNewUrlParser: true,
    useUnifiedTopology: true,
   useFindAndModify: false,
    useCreateIndex: true
  })
- .then(() => console.log('connected to online'))
+ .then(() => console.log('connected to db'))
 .catch((err)=> console.log(err)); 
+
+
+// online  connection
+// mongoose.connect('mongodb+srv://fund:micheal@cluster0.urmkbdt.mongodb.net/?retryWrites=true&w=majority', {
+//    useNewUrlParser: true,
+//    useUnifiedTopology: true,
+//   useFindAndModify: false,
+//    useCreateIndex: true
+//  })
+//  .then(() => console.log('connected to online'))
+// .catch((err)=> console.log(err)); 
 
 
 
