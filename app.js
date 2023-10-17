@@ -35,11 +35,10 @@ const resetPasswordRoute = require("./routes/resetpassword");
 //  .then(() => console.log('connected to db'))
 // .catch((err)=> console.log(err)); 
 
-mongoose.connect('mongodb+srv://fund:micheal@cluster0.urmkbdt.mongodb.net/?retryWrites=true&w=majority', {
-   useNewUrlParser: true,
-   useUnifiedTopology: true,
-  useFindAndModify: false,
-   useCreateIndex: true
+mongoose.connect('mongodb+srv://mycon:micheal@cluster0.fpgbpte.mongodb.net/?retryWrites=true&w=majority', {    
+    useNewUrlParser: true,
+  useUnifiedTopology: true,
+
  })
  .then(() => console.log('connected to online'))
 .catch((err)=> console.log(err)); 
