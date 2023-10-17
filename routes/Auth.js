@@ -29,19 +29,7 @@ router.post('/signup',(req, res)=>{
             const {firstname, lastname, username, email, password, password2} = req.body;
             let errors = [];
            
-                const secretKey = '6LcS2joiAAAAADV7sOcNIe-u0IL2Q7aXmQME5JUs';
-        
-                const verifyUrl = `https://google.com/recaptcha/api/siteverify?secret=${secretKey}
-                &response=${req.body.captcha}&remoteip=${req.connection.remoteAddress}`;
-        
-        
-                request(verifyUrl, (err, response, body)=> {
-                    body = JSON.parse(body);
-        
-                    
-                    // return res.json({"success": true, "msg":"successful"});
-        
-                })
+                
         
         
 

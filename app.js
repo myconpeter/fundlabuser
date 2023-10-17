@@ -7,7 +7,7 @@ const session = require('express-session');
 const flash = require("connect-flash");
 
 
-const PORT  = process.env.PORT  || 8000;
+const PORT  = process.env.PORT  || 3000;
 
 
 //passport config:
@@ -24,35 +24,25 @@ const resetPasswordRoute = require("./routes/resetpassword");
 
 
 
-// mongodb connection
-// mongoose.connect("mongodb+srv://flamingo:michealisaman@cluster0.hknyx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-//   useFindAndModify: false,
-
-//   useCreateIndex: true
-//  });
 
 // local connection
-mongoose.connect('mongodb://localhost/fundLab', {
-   useNewUrlParser: true,
-   useUnifiedTopology: true,
-  useFindAndModify: false,
-   useCreateIndex: true
- })
- .then(() => console.log('connected to db'))
-.catch((err)=> console.log(err)); 
-
-
-// online  connection
-// mongoose.connect('mongodb+srv://fund:micheal@cluster0.urmkbdt.mongodb.net/?retryWrites=true&w=majority', {
+// mongoose.connect('mongodb://localhost/mycon', {
 //    useNewUrlParser: true,
 //    useUnifiedTopology: true,
 //   useFindAndModify: false,
 //    useCreateIndex: true
 //  })
-//  .then(() => console.log('connected to online'))
+//  .then(() => console.log('connected to db'))
 // .catch((err)=> console.log(err)); 
+
+mongoose.connect('mongodb+srv://fund:micheal@cluster0.urmkbdt.mongodb.net/?retryWrites=true&w=majority', {
+   useNewUrlParser: true,
+   useUnifiedTopology: true,
+  useFindAndModify: false,
+   useCreateIndex: true
+ })
+ .then(() => console.log('connected to online'))
+.catch((err)=> console.log(err)); 
 
 
 
@@ -87,7 +77,6 @@ app.use((req,res,next)=> {
 
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use(express.static(__dirname + '/public'));
 
 app.use((req, res, next) => {
     res.locals.currentUser = req.user;
@@ -100,7 +89,7 @@ app.use(investmentRoutes);
 app.use(withdrawalRoutes);
 app.use(resetPasswordRoute);
 
-
+app.use(express.static(__dirname + '/public'));
 
 
 
